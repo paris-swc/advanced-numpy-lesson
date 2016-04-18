@@ -18,7 +18,9 @@ title: Advanced NumPy
 
 ## Topics
 
-1.  [Operations on NumPy arrays](00-intro.html)
+1.  [Introduction](00-intro.html)
+2.  [Operations on NumPy arrays](01-operations.html)
+3.  [Broadcasting](02-broadcasting.html)
 
 ## Other Resources
 

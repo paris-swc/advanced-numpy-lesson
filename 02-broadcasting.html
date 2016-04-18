@@ -33,44 +33,67 @@
 <h2 id="learning-objectives"><span class="glyphicon glyphicon-certificate"></span>Learning Objectives</h2>
 </div>
 <div class="panel-body">
+<p>After the lesson learner:</p>
 <ul>
-<li>Learner will explain the difference between element-wise and matrix product of two arrays.</li>
-<li>Learner will apply reduction functions (mean, min, max) along a given axis.</li>
-<li>Learner find a specialised numerical algorithm from the ones available in numpy.</li>
-<li>Learner will be able to use from several sorting routines.</li>
+<li>Knows how to add a scalar to all elements of an array.</li>
+<li>Can predict the result of additions of matrices and row or column vectors.</li>
+<li>Can explain why broadcasting is better than using for loops.</li>
+<li>Understands the rules of broadcasting and can predict the shape of broadcasted arrays.</li>
+<li>Knows how to control broadcasting using <code>np.newaxis</code> object.</li>
 </ul>
 </div>
 </section>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h2 id="creating-a-square-array"><span class="glyphicon glyphicon-pencil"></span>Creating a square array</h2>
+<h2 id="normalising-data"><span class="glyphicon glyphicon-pencil"></span>Normalising data</h2>
 </div>
 <div class="panel-body">
-<p>Create a 5x5 square array with number 5 on diagonal and zeros otherwise. Consider using <code>np.eye</code> function (you can check the docstring).</p>
+<p>Calculate Z-score for each row of a 10x100 matrix.</p>
 </div>
 </section>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h2 id="generating-random-sequences"><span class="glyphicon glyphicon-pencil"></span>Generating random sequences</h2>
+<h2 id="three-dimensional-broadcasting"><span class="glyphicon glyphicon-pencil"></span>Three-dimensional broadcasting</h2>
 </div>
 <div class="panel-body">
-<p>Generate a random sequence of 10 integers from 1 to 100 without repetition (you may want to use <code>np.random.rand</code> and <code>np.argsort</code>).</p>
+<p>Below, produce the array containing the sum of every element in <code>x</code> with every element in <code>y</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> np.random.rand(<span class="dv">3</span>, <span class="dv">5</span>)
+y <span class="op">=</span> np.random.randint(<span class="dv">10</span>, size<span class="op">=</span><span class="dv">8</span>)
+z <span class="op">=</span> x <span class="co"># FIX THIS</span></code></pre></div>
 </div>
 </section>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h2 id="finding-closest-element"><span class="glyphicon glyphicon-pencil"></span>Finding closest element</h2>
+<h2 id="broadcasting-rules"><span class="glyphicon glyphicon-pencil"></span>Broadcasting rules</h2>
 </div>
 <div class="panel-body">
-<p>Generate a 10 x 3 array of random numbers. From each row, pick the number closest to 0.75. Make use of <code>np.abs</code> and <code>np.argmax</code> to find the column j which contains the closest element in each row.</p>
+<p>Given the arrays:</p>
+<pre><code>X = np.random.rand(10,3)
+Y = np.random.rand(3)</code></pre>
+<p>which of the following will <em>not</em> produce an error:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><code>X + Y</code></p></li>
+<li><p><code>X[None, :] + Y</code></p></li>
+<li><p><code>X[np.newaxis, :] + Y</code></p></li>
+<li><p><code>X[None, :] + Y[:, None]</code></p></li>
+<li><p><code>X[:, np.newaxis] + Y</code></p></li>
+<li><p><code>X + Y[np.newaxis, :]</code></p></li>
+</ol>
+<p>What will be the shapes of the final broadcasted arrays? Try to guess and then check using <code>np.broadcast_arrays</code>.</p>
 </div>
 </section>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h2 id="solving-linear-equations"><span class="glyphicon glyphicon-pencil"></span>Solving linear equations</h2>
+<h2 id="creating-a-two-dimensional-grid"><span class="glyphicon glyphicon-pencil"></span>Creating a two-dimensional grid</h2>
 </div>
 <div class="panel-body">
-<p>Solve the following system of linear equations using numpy. Test the solution. <span class="math display">\[2x_1 + 3x_2 = 3\]</span> <span class="math display">\[5x_1 - x_2 = 6\]</span></p>
+<p>What are the dimensionalities of <code>x</code>, <code>y</code> and <code>z</code> in the two cases:</p>
+<pre><code>x, y = np.mgrid[:10, :5]
+z = x + y</code></pre>
+<p>and</p>
+<pre><code>x, y = np.ogrid[:10, :5]
+z = x + y</code></pre>
+<p>What might be the advantage of using <code>np.ogrid</code> over <code>np.mgrid</code>?</p>
 </div>
 </section>
         </div>
