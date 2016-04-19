@@ -46,6 +46,33 @@
 </div>
 </section>
 <h3 id="integer-indexing-and-slicing">Integer indexing and slicing</h3>
+<p>Individual items of an array can be accessed by the integer index of the element (starting with 0):</p>
+<pre><code>&gt;&gt;&gt; a = np.arange(10)
+&gt;&gt;&gt; a
+array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+&gt;&gt;&gt; a[0], a[2], a[-1]
+(0, 2, 9)</code></pre>
+<p>For two- or more dimensional arrays multiple indices should be specified:</p>
+<pre><code>&gt;&gt;&gt; b = np.arange(6).reshape(2,3)
+&gt;&gt;&gt; b
+array([[0, 1, 2],
+       [3, 4, 5]])
+&gt;&gt;&gt; b[1, 2]
+5</code></pre>
+<p>Slicing allows to extract sub-arrays of multiple elements from the array. It’s defined by three integers separated by a colon, e.g. start:end:increment. Any of the values can be skipped in which case they are replaced by defaults (0 for start, -1 for end and 1 for increment):</p>
+<pre><code>&gt;&gt;&gt; c = np.arange(9)
+&gt;&gt;&gt; c[1:3]
+array([1, 2])
+&gt;&gt;&gt; c[:3]
+array([0, 1, 2])
+&gt;&gt;&gt; c[1:]
+array([1, 2, 3, 4, 5, 6, 7, 8])</code></pre>
+<p>You can also assign elements with slices and indexes:</p>
+<pre><code>&gt;&gt;&gt; c
+array([0, 1, 2, 3, 4, 5, 6, 7, 8])
+&gt;&gt;&gt; c[1:8:2]=1000
+&gt;&gt;&gt; c
+array([   0, 1000,    2, 1000,    4, 1000,    6, 1000,    8])</code></pre>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="view-or-copy"><span class="glyphicon glyphicon-pencil"></span>View or copy</h2>
@@ -62,7 +89,45 @@
 <p>Create a 8x8 matrix and fill it with a checkerboard pattern</p>
 </div>
 </section>
-<h3 id="boolean-indexing">Boolean indexing</h3>
+<h3 id="boolean-mask">Boolean mask</h3>
+<p>Sometimes we may want to select array elements based on some criterion. For this case boolean mask is very useful. The mask is an array of the same length as the indexed array containg only <code>False</code> or <code>True</code> values:</p>
+<pre><code>&gt;&gt;&gt; a = np.arange(4)
+&gt;&gt;&gt; a
+array([0, 1, 2, 3])
+&gt;&gt;&gt; mask = np.array([False, True, True, False])
+&gt;&gt;&gt; a[mask]
+array([1, 2])</code></pre>
+<p>In most cases the mask is constructed from the values of the array itself. For example, to select only odd numbers we could use the following mask:</p>
+<pre><code>&gt;&gt;&gt; odd = (a % 2) == 1
+&gt;&gt;&gt; odd
+array([False,  True, False,  True], dtype=bool)
+&gt;&gt;&gt; a[odd]
+array([1, 3])</code></pre>
+<p>This could be also done in a single step:</p>
+<pre><code>&gt;&gt;&gt; a[(a % 2) == 1]
+array([1, 3])</code></pre>
+<p>Indexing with a mask can be also useful to assign a new value to a sub-array:</p>
+<pre><code>&gt;&gt;&gt; a[(a % 2) == 1] = -1
+&gt;&gt;&gt; a
+array([ 0, -1,  2, -1])</code></pre>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="view-or-copy-1"><span class="glyphicon glyphicon-pencil"></span>View or copy?</h2>
+</div>
+<div class="panel-body">
+<p>What are the final values of <code>a</code> and <code>b</code> at the end of the following program? Explain why.</p>
+<pre><code>a = np.arange(5)
+b = a[a &lt; 3]
+b[::2] = 0</code></pre>
+<ol style="list-style-type: lower-alpha">
+<li><code>a = [0, 1, 2, 3, 4], b = [0, 1, 2]</code></li>
+<li><code>a = [0, 1, 0, 3, 4], b = [0, 1, 0]</code></li>
+<li><code>a = [0, 0, 2, 3, 4], b = [0, 0, 2]</code></li>
+<li><code>a = [0, 1, 2, 3, 4], b = [0, 1, 0]</code></li>
+<li><code>a = [0, 1, 2, 3, 4], b = [0, 1, 0, 3, 0]</code></li>
+</ol>
+</div>
+</section>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="rectification"><span class="glyphicon glyphicon-pencil"></span>Rectification</h2>
@@ -71,15 +136,25 @@
 <p>Rectify an array with random numbers from normal distribution (generated with <code>np.random.randn</code>) using boolean indexing.</p>
 </div>
 </section>
-<section class="challenge panel panel-success">
-<div class="panel-heading">
-<h2 id="criterion-based-selection"><span class="glyphicon glyphicon-pencil"></span>Criterion-based selection</h2>
-</div>
-<div class="panel-body">
-<p>Select odd elements from an integer array.</p>
-</div>
-</section>
 <h3 id="fancy-indexing">Fancy indexing</h3>
+<p>Indexing can be done with an array of integers. In this case the same index can be also repeated several times:</p>
+<pre><code>&gt;&gt;&gt; a = np.arange(0, 100, 10)
+&gt;&gt;&gt; a
+array([ 0, 10, 20, 30, 40, 50, 60, 70, 80, 90])
+&gt;&gt;&gt; a[[2, 3, 2, 4, 2]] 
+array([20, 30, 20, 40, 20])</code></pre>
+<p>New values can be also assigned with this kind of indexing:</p>
+<pre><code>&gt;&gt;&gt; a[[9, 7]] = -100
+&gt;&gt;&gt; a
+array([   0,   10,   20,   30,   40,   50,   60, -100,   80, -100])</code></pre>
+<p>When a new array is created by indexing with an array of integers, the new array has the same shape than the array of integers. Note that the array returns a copy and not a view.</p>
+<pre><code>&gt;&gt;&gt; a = np.arange(10)
+&gt;&gt;&gt; idx = np.array([[3, 4], [9, 7]])
+&gt;&gt;&gt; idx.shape
+(2, 2)
+&gt;&gt;&gt; a[idx]
+array([[3, 4],
+       [9, 7]])</code></pre>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="random-elements"><span class="glyphicon glyphicon-pencil"></span>Random elements</h2>
@@ -128,13 +203,18 @@ x[idx0, idx1, idx2]</code></pre></div>
 <p>For each statement predict whether it returns a copy or a view.</p>
 </div>
 </section>
-<h3 id="k-mean-clustering">K-mean clustering</h3>
+<h3 id="k-means-clustering">K-means clustering</h3>
+<p>K-means is a simple clustering algorithm.</p>
+<div class="figure">
+<img src="fig/kmeans_illustration.png" />
+
+</div>
         </div>
       </div>
       </article>
       <div class="footer">
         <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
-        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/lesson-template">Source</a>
+        <a class="label swc-blue-bg" href="https://github.com/paris-swc/advanced-numpy-lesson">Source</a>
         <a class="label swc-blue-bg" href="mailto:admin@software-carpentry.org">Contact</a>
         <a class="label swc-blue-bg" href="LICENSE.html">License</a>
       </div>

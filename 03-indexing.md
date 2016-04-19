@@ -18,6 +18,48 @@ minutes: 45
 
 ### Integer indexing and slicing
 
+Individual items of an array can be accessed by the integer index of the element (starting with 0):
+
+```
+>>> a = np.arange(10)
+>>> a
+array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+>>> a[0], a[2], a[-1]
+(0, 2, 9)
+```
+
+For two- or more dimensional arrays multiple indices should be specified:
+
+```
+>>> b = np.arange(6).reshape(2,3)
+>>> b
+array([[0, 1, 2],
+       [3, 4, 5]])
+>>> b[1, 2]
+5
+```
+
+Slicing allows to extract sub-arrays of multiple elements from the array. It's defined by three integers separated by a colon, e.g. start:end:increment. Any of the values can be skipped in which case they are replaced by defaults (0 for start, -1 for end and 1 for increment):
+
+```
+>>> c = np.arange(9)
+>>> c[1:3]
+array([1, 2])
+>>> c[:3]
+array([0, 1, 2])
+>>> c[1:]
+array([1, 2, 3, 4, 5, 6, 7, 8])
+```
+
+You can also assign elements with slices and indexes:
+
+```
+>>> c
+array([0, 1, 2, 3, 4, 5, 6, 7, 8])
+>>> c[1:8:2]=1000
+>>> c
+array([   0, 1000,    2, 1000,    4, 1000,    6, 1000,    8])
+```
 
 > ## View or copy {.challenge}
 >
@@ -30,17 +72,95 @@ minutes: 45
 >
 > Create a 8x8 matrix and fill it with a checkerboard pattern
 
-### Boolean indexing
+### Boolean mask
+
+Sometimes we may want to select array elements based on some criterion. For this case boolean mask is very useful. The mask is an array of the same length as the indexed array containg only `False` or `True` values:
+
+```
+>>> a = np.arange(4)
+>>> a
+array([0, 1, 2, 3])
+>>> mask = np.array([False, True, True, False])
+>>> a[mask]
+array([1, 2])
+```
+
+In most cases the mask is constructed from the values of the array itself. For example, to select only odd numbers we could use the following mask:
+
+```
+>>> odd = (a % 2) == 1
+>>> odd
+array([False,  True, False,  True], dtype=bool)
+>>> a[odd]
+array([1, 3])
+```
+
+This could be also done in a single step:
+
+```
+>>> a[(a % 2) == 1]
+array([1, 3])
+```
+
+Indexing with a mask can be also useful to assign a new value to a sub-array:
+
+```
+>>> a[(a % 2) == 1] = -1
+>>> a
+array([ 0, -1,  2, -1])
+```
+
+> ## View or copy? {.challenge}
+>
+> What are the final values of `a` and `b` at the end of the following program? Explain why.
+>
+> ```
+> a = np.arange(5)
+> b = a[a < 3]
+> b[::2] = 0
+> ```
+> 
+> a) `a = [0, 1, 2, 3, 4], b = [0, 1, 2]`
+> b) `a = [0, 1, 0, 3, 4], b = [0, 1, 0]`
+> c) `a = [0, 0, 2, 3, 4], b = [0, 0, 2]`
+> d) `a = [0, 1, 2, 3, 4], b = [0, 1, 0]`
+> e) `a = [0, 1, 2, 3, 4], b = [0, 1, 0, 3, 0]`
 
 > ## Rectification {.challenge}
 >
 > Rectify an array with random numbers from normal distribution (generated with `np.random.randn`) using boolean indexing.
 
-> ## Criterion-based selection {.challenge}
-> 
-> Select odd elements from an integer array.
-
 ### Fancy indexing
+
+Indexing can be done with an array of integers. In this case the same index can be also repeated several times:
+
+```
+>>> a = np.arange(0, 100, 10)
+>>> a
+array([ 0, 10, 20, 30, 40, 50, 60, 70, 80, 90])
+>>> a[[2, 3, 2, 4, 2]] 
+array([20, 30, 20, 40, 20])
+```
+
+New values can be also assigned with this kind of indexing:
+
+```
+>>> a[[9, 7]] = -100
+>>> a
+array([   0,   10,   20,   30,   40,   50,   60, -100,   80, -100])
+```
+
+When a new array is created by indexing with an array of integers, the new array has the same shape than the array of integers. Note that the array returns a copy and not a view.
+
+```
+>>> a = np.arange(10)
+>>> idx = np.array([[3, 4], [9, 7]])
+>>> idx.shape
+(2, 2)
+>>> a[idx]
+array([[3, 4],
+       [9, 7]])
+```
 
 > ## Random elements {.challenge}
 >
@@ -82,4 +202,8 @@ minutes: 45
 >
 > For each statement predict whether it returns a copy or a view.
 
-### K-mean clustering
+### K-means clustering
+
+K-means is a simple clustering algorithm.
+
+![](fig/kmeans_illustration.png)
