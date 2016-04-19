@@ -14,20 +14,114 @@ minutes: 30
 > * Understands the rules of broadcasting and can predict the shape of broadcasted arrays.
 > * Knows how to control broadcasting using `np.newaxis` object.
 
+It’s possible to do operations on arrays of different sizes if Numpy can
+transform these arrays so that they all have the same size: this conversion is
+called broadcasting.
+
+![numpy broadcasting in 2D](fig/numpy_broadcasting.png "numpy broadcasting in 2D")
+
+Let's try to reproduce the above diagram. First, we create two one-dimensional arrays:
+
+```
+>>> a = np.arange(3) * 10
+>>> b = np.arange(3)
+>>> a
+array([ 0, 10, 20])
+>>> b
+array([0, 1, 2])
+```
+
+We can tile them in 2D using `np.tile` function:
+
+```
+>>> b2 = np.tile(b, (3, 1))
+>>> b2
+array([[0, 1, 2],
+       [0, 1, 2],
+       [0, 1, 2]])
+>>> a2 = np.tile(a, (3, 1))
+>>> a2 = a2.T
+>>> a2
+array([[ 0,  0,  0],
+       [10, 10, 10],
+       [20, 20, 20]])
+```
+
+Then you can add them element-wise:
+
+```
+>>> a2 + b2
+array([[ 0,  1,  2],
+       [10, 11, 12],
+       [20, 21, 22]])
+```
+
+Alternatively, you could directly add a 1D array to 2D array. NumPy will automatically "tile" the 1D array along the missing direction, however no copy is involved:
+
+```
+>>> a2 + b
+array([[ 0,  1,  2],
+       [10, 11, 12],
+       [20, 21, 22]])
+```
+
+To obtain a column vector from a 1D array we need to convert it to 2D array by a special `np.newaxis` object:
+
+```
+>>> a.shape
+(3,)
+>>> a_column = a[:, np.newaxis]
+>>> a_column.shape
+(3, 1)
+>>> a_column
+array([[ 0],
+       [10],
+       [20]])
+```
+
+We can add a column vector and a 1D array:
+
+```
+>>> a_column + b
+array([[ 0,  1,  2],
+       [10, 11, 12],
+       [20, 21, 22]])
+```
+
+This is the same as:
+
+``` {.python}
+>>> b_row = b[np.newaxis, :]
+>>> b_row
+array([[0, 1, 2]])
+>>> b_row.shape
+(1, 3)
+>>> a_column + b_row
+array([[ 0,  1,  2],
+       [10, 11, 12],
+       [20, 21, 22]])
+```
 
 > ## Normalising data {.challenge}
 > 
 > Calculate Z-score for each row of a 10x100 matrix.
 
-> ## Three-dimensional broadcasting {.challenge}
->
-> Below, produce the array containing the sum of every element in `x` with every element in `y`
->
-> ```python
-> x = np.random.rand(3, 5)
-> y = np.random.randint(10, size=8)
-> z = x # FIX THIS
-> ```
+
+Broadcasting seems a bit magical, but it is actually quite natural to use it when we want to solve a problem whose output data is an array with more dimensions than input data. There a simple rule that allow to determine the validity of broadcasting and the shape of broadcasted arrays:
+
+>  In order to broadcast, the size of the trailing axes for both arrays in an operation must either be the same or one of them must be one. 
+
+Lets look at two examples:
+
+```
+Image  (3d array): 256 x 256 x 3
+Scale  (1d array):             3
+Result (3d array): 256 x 256 x 3
+
+A      (4d array):  8 x 1 x 6 x 1
+B      (3d array):      7 x 1 x 5
+Result (4d array):  8 x 7 x 6 x 5
+```
 
 > ## Broadcasting rules {.challenge}
 > 
@@ -53,6 +147,30 @@ minutes: 30
 > 
 > What will be the shapes of the final broadcasted arrays? Try to guess and then check using `np.broadcast_arrays`.
 
+> ## Three-dimensional broadcasting {.challenge}
+>
+> Below, produce the array containing the sum of every element in `x` with every element in `y`
+>
+> ```python
+> x = np.random.rand(3, 5)
+> y = np.random.randint(10, size=8)
+> z = x # FIX THIS
+> ```
+
+
+A lot of grid-based or network-based problems can also use broadcasting. For instance, if we want to compute the distance from the origin of points on a 10x10 grid, we can do
+```
+>>> x = np.arange(5)
+>>> y = np.arange(5)[:, np.newaxis]
+>>> distance = np.sqrt(x ** 2 + y ** 2)
+>>> distance
+array([[ 0.        ,  1.        ,  2.        ,  3.        ,  4.        ],
+       [ 1.        ,  1.41421356,  2.23606798,  3.16227766,  4.12310563],
+       [ 2.        ,  2.23606798,  2.82842712,  3.60555128,  4.47213595],
+       [ 3.        ,  3.16227766,  3.60555128,  4.24264069,  5.        ],
+       [ 4.        ,  4.12310563,  4.47213595,  5.        ,  5.65685425]])
+```
+
 > ## Creating a two-dimensional grid {.challenge}
 > 
 > What are the dimensionalities of `x`, `y` and `z` in the two cases:
@@ -70,6 +188,27 @@ minutes: 30
 > ```
 > 
 > What might be the advantage of using `np.ogrid` over `np.mgrid`?
+
+> ## Worked example: Route 66 {.callout}
+>
+> Let’s construct an array of distances (in miles) between cities of Route 66: Chicago, Springfield, Saint-Louis, Tulsa, Oklahoma City, Amarillo, Santa Fe, Albuquerque, Flagstaff and Los Angeles.
+> ```
+> >>> mileposts = np.array([0, 198, 303, 736, 871, 1175, 1475, 1544,
+> ...        1913, 2448])
+> >>> distance_array = np.abs(mileposts - mileposts[:, np.newaxis])
+> >>> distance_array
+> array([[   0,  198,  303,  736,  871, 1175, 1475, 1544, 1913, 2448],
+>        [ 198,    0,  105,  538,  673,  977, 1277, 1346, 1715, 2250],
+>        [ 303,  105,    0,  433,  568,  872, 1172, 1241, 1610, 2145],
+>        [ 736,  538,  433,    0,  135,  439,  739,  808, 1177, 1712],
+>        [ 871,  673,  568,  135,    0,  304,  604,  673, 1042, 1577],
+>        [1175,  977,  872,  439,  304,    0,  300,  369,  738, 1273],
+>        [1475, 1277, 1172,  739,  604,  300,    0,   69,  438,  973],
+>        [1544, 1346, 1241,  808,  673,  369,   69,    0,  369,  904],
+>        [1913, 1715, 1610, 1177, 1042,  738,  438,  369,    0,  535],
+>        [2448, 2250, 2145, 1712, 1577, 1273,  973,  904,  535,    0]])
+>```
+> ![Distances on Route 66](fig/route66.png)
 
 > ## Distances {.challenge}
 > 
@@ -93,3 +232,8 @@ minutes: 30
 > $$D=6371.009\sqrt{(\Delta\phi)^2 + (\cos(\phi_m)\Delta\lambda)^2}$$
 >
 > where $\phi_m = (\phi_1+\phi_2) / 2$ is the mean longitude.
+
+
+
+
+

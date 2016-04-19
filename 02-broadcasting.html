@@ -43,6 +43,65 @@
 </ul>
 </div>
 </section>
+<p>It’s possible to do operations on arrays of different sizes if Numpy can transform these arrays so that they all have the same size: this conversion is called broadcasting.</p>
+<div class="figure">
+<img src="fig/numpy_broadcasting.png" title="numpy broadcasting in 2D" alt="numpy broadcasting in 2D" />
+<p class="caption">numpy broadcasting in 2D</p>
+</div>
+<p>Let’s try to reproduce the above diagram. First, we create two one-dimensional arrays:</p>
+<pre><code>&gt;&gt;&gt; a = np.arange(3) * 10
+&gt;&gt;&gt; b = np.arange(3)
+&gt;&gt;&gt; a
+array([ 0, 10, 20])
+&gt;&gt;&gt; b
+array([0, 1, 2])</code></pre>
+<p>We can tile them in 2D using <code>np.tile</code> function:</p>
+<pre><code>&gt;&gt;&gt; b2 = np.tile(b, (3, 1))
+&gt;&gt;&gt; b2
+array([[0, 1, 2],
+       [0, 1, 2],
+       [0, 1, 2]])
+&gt;&gt;&gt; a2 = np.tile(a, (3, 1))
+&gt;&gt;&gt; a2 = a2.T
+&gt;&gt;&gt; a2
+array([[ 0,  0,  0],
+       [10, 10, 10],
+       [20, 20, 20]])</code></pre>
+<p>Then you can add them element-wise:</p>
+<pre><code>&gt;&gt;&gt; a2 + b2
+array([[ 0,  1,  2],
+       [10, 11, 12],
+       [20, 21, 22]])</code></pre>
+<p>Alternatively, you could directly add a 1D array to 2D array. NumPy will automatically “tile” the 1D array along the missing direction, however no copy is involved:</p>
+<pre><code>&gt;&gt;&gt; a2 + b
+array([[ 0,  1,  2],
+       [10, 11, 12],
+       [20, 21, 22]])</code></pre>
+<p>To obtain a column vector from a 1D array we need to convert it to 2D array by a special <code>np.newaxis</code> object:</p>
+<pre><code>&gt;&gt;&gt; a.shape
+(3,)
+&gt;&gt;&gt; a_column = a[:, np.newaxis]
+&gt;&gt;&gt; a_column.shape
+(3, 1)
+&gt;&gt;&gt; a_column
+array([[ 0],
+       [10],
+       [20]])</code></pre>
+<p>We can add a column vector and a 1D array:</p>
+<pre><code>&gt;&gt;&gt; a_column + b
+array([[ 0,  1,  2],
+       [10, 11, 12],
+       [20, 21, 22]])</code></pre>
+<p>This is the same as:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> b_row <span class="op">=</span> b[np.newaxis, :]
+<span class="op">&gt;&gt;&gt;</span> b_row
+array([[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>]])
+<span class="op">&gt;&gt;&gt;</span> b_row.shape
+(<span class="dv">1</span>, <span class="dv">3</span>)
+<span class="op">&gt;&gt;&gt;</span> a_column <span class="op">+</span> b_row
+array([[ <span class="dv">0</span>,  <span class="dv">1</span>,  <span class="dv">2</span>],
+       [<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>],
+       [<span class="dv">20</span>, <span class="dv">21</span>, <span class="dv">22</span>]])</code></pre></div>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="normalising-data"><span class="glyphicon glyphicon-pencil"></span>Normalising data</h2>
@@ -51,17 +110,18 @@
 <p>Calculate Z-score for each row of a 10x100 matrix.</p>
 </div>
 </section>
-<section class="challenge panel panel-success">
-<div class="panel-heading">
-<h2 id="three-dimensional-broadcasting"><span class="glyphicon glyphicon-pencil"></span>Three-dimensional broadcasting</h2>
-</div>
-<div class="panel-body">
-<p>Below, produce the array containing the sum of every element in <code>x</code> with every element in <code>y</code></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> np.random.rand(<span class="dv">3</span>, <span class="dv">5</span>)
-y <span class="op">=</span> np.random.randint(<span class="dv">10</span>, size<span class="op">=</span><span class="dv">8</span>)
-z <span class="op">=</span> x <span class="co"># FIX THIS</span></code></pre></div>
-</div>
-</section>
+<p>Broadcasting seems a bit magical, but it is actually quite natural to use it when we want to solve a problem whose output data is an array with more dimensions than input data. There a simple rule that allow to determine the validity of broadcasting and the shape of broadcasted arrays:</p>
+<blockquote>
+<p>In order to broadcast, the size of the trailing axes for both arrays in an operation must either be the same or one of them must be one.</p>
+</blockquote>
+<p>Lets look at two examples:</p>
+<pre><code>Image  (3d array): 256 x 256 x 3
+Scale  (1d array):             3
+Result (3d array): 256 x 256 x 3
+
+A      (4d array):  8 x 1 x 6 x 1
+B      (3d array):      7 x 1 x 5
+Result (4d array):  8 x 7 x 6 x 5</code></pre>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="broadcasting-rules"><span class="glyphicon glyphicon-pencil"></span>Broadcasting rules</h2>
@@ -84,6 +144,27 @@ Y = np.random.rand(3)</code></pre>
 </section>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
+<h2 id="three-dimensional-broadcasting"><span class="glyphicon glyphicon-pencil"></span>Three-dimensional broadcasting</h2>
+</div>
+<div class="panel-body">
+<p>Below, produce the array containing the sum of every element in <code>x</code> with every element in <code>y</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> np.random.rand(<span class="dv">3</span>, <span class="dv">5</span>)
+y <span class="op">=</span> np.random.randint(<span class="dv">10</span>, size<span class="op">=</span><span class="dv">8</span>)
+z <span class="op">=</span> x <span class="co"># FIX THIS</span></code></pre></div>
+</div>
+</section>
+<p>A lot of grid-based or network-based problems can also use broadcasting. For instance, if we want to compute the distance from the origin of points on a 10x10 grid, we can do</p>
+<pre><code>&gt;&gt;&gt; x = np.arange(5)
+&gt;&gt;&gt; y = np.arange(5)[:, np.newaxis]
+&gt;&gt;&gt; distance = np.sqrt(x ** 2 + y ** 2)
+&gt;&gt;&gt; distance
+array([[ 0.        ,  1.        ,  2.        ,  3.        ,  4.        ],
+       [ 1.        ,  1.41421356,  2.23606798,  3.16227766,  4.12310563],
+       [ 2.        ,  2.23606798,  2.82842712,  3.60555128,  4.47213595],
+       [ 3.        ,  3.16227766,  3.60555128,  4.24264069,  5.        ],
+       [ 4.        ,  4.12310563,  4.47213595,  5.        ,  5.65685425]])</code></pre>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
 <h2 id="creating-a-two-dimensional-grid"><span class="glyphicon glyphicon-pencil"></span>Creating a two-dimensional grid</h2>
 </div>
 <div class="panel-body">
@@ -96,6 +177,32 @@ z = x + y</code></pre>
 <p>What might be the advantage of using <code>np.ogrid</code> over <code>np.mgrid</code>?</p>
 </div>
 </section>
+<aside class="callout panel panel-info">
+<div class="panel-heading">
+<h2 id="worked-example-route-66"><span class="glyphicon glyphicon-pushpin"></span>Worked example: Route 66</h2>
+</div>
+<div class="panel-body">
+<p>Let’s construct an array of distances (in miles) between cities of Route 66: Chicago, Springfield, Saint-Louis, Tulsa, Oklahoma City, Amarillo, Santa Fe, Albuquerque, Flagstaff and Los Angeles.</p>
+<pre><code>&gt;&gt;&gt; mileposts = np.array([0, 198, 303, 736, 871, 1175, 1475, 1544,
+...        1913, 2448])
+&gt;&gt;&gt; distance_array = np.abs(mileposts - mileposts[:, np.newaxis])
+&gt;&gt;&gt; distance_array
+array([[   0,  198,  303,  736,  871, 1175, 1475, 1544, 1913, 2448],
+       [ 198,    0,  105,  538,  673,  977, 1277, 1346, 1715, 2250],
+       [ 303,  105,    0,  433,  568,  872, 1172, 1241, 1610, 2145],
+       [ 736,  538,  433,    0,  135,  439,  739,  808, 1177, 1712],
+       [ 871,  673,  568,  135,    0,  304,  604,  673, 1042, 1577],
+       [1175,  977,  872,  439,  304,    0,  300,  369,  738, 1273],
+       [1475, 1277, 1172,  739,  604,  300,    0,   69,  438,  973],
+       [1544, 1346, 1241,  808,  673,  369,   69,    0,  369,  904],
+       [1913, 1715, 1610, 1177, 1042,  738,  438,  369,    0,  535],
+       [2448, 2250, 2145, 1712, 1577, 1273,  973,  904,  535,    0]])</code></pre>
+<div class="figure">
+<img src="fig/route66.png" alt="Distances on Route 66" />
+<p class="caption">Distances on Route 66</p>
+</div>
+</div>
+</aside>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="distances"><span class="glyphicon glyphicon-pencil"></span>Distances</h2>
