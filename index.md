@@ -23,6 +23,7 @@ title: Advanced NumPy
 3.  [Broadcasting](02-broadcasting.html)
 4.  [Indexing](03-indexing.html)
 5.  [Array container](04-container.html)
+6.  [Summing up](05-summing-up.html)
 
 ## Other Resources
 
