@@ -23,7 +23,7 @@ Under the following terms:
 
 * **Attribution**---You must give appropriate credit (mentioning that
   your work is derived from work that is Copyright © Software
-  Carpentry, Juan Nunez-Iglesias, Stefan van der Walt, Bartosz Teleńczuk and Bartosz Teleńczuk  and, where practical, linking to
+  Carpentry, Juan Nunez-Iglesias, Stefan van der Walt, Bartosz Teleńczuk, Emmanuelle Gouillart, Didrik Pinte, Gaël Varoquaux, and Pauli Virtanen   and, where practical, linking to
   http://software-carpentry.org/), provide a [link to the
   license][cc-by-human], and indicate if changes were made. You may do
   so in any reasonable manner, but not in any way that suggests the
