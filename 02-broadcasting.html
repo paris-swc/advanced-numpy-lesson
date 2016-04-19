@@ -101,7 +101,20 @@ z = x + y</code></pre>
 <h2 id="distances"><span class="glyphicon glyphicon-pencil"></span>Distances</h2>
 </div>
 <div class="panel-body">
-<p>Given an array of latitudes and longitudes of major European capital calculate pairwise distances between them.</p>
+<p>Given an array of latitudes and longitudes of major European capitals calculate pairwise distances between them. Use the approximate formula:</p>
+<p><span class="math display">\[D=6371.009\sqrt{(\Delta\phi)^2 + (\Delta\lambda)^2}\qquad \text{(in kilometers)},\]</span></p>
+<p>where <span class="math inline">\(\Delta\phi=\phi_1-\phi_2\)</span> and <span class="math inline">\(\Delta\lambda=\lambda_1-\lambda_2\)</span> are the differences between the latitudes and longitude of two cities in radians. (<em>Hint</em>: To convert degrees to radians multiply them by <span class="math inline">\(\pi/180\)</span>).</p>
+<pre><code>coords = np.array([
+                  [ 23.71666667,  37.96666667],
+                  [ 13.38333333,  52.51666667],
+                  [ -0.1275    ,  51.50722222],
+                  [ -3.71666667,  40.38333333],
+                  [  2.3508    ,  48.8567    ],
+                  [ 12.5       ,  41.9       ]])
+names = np.array([&#39;Athens&#39;, &#39;Berlin&#39;, &#39;London&#39;, &#39;Madrid&#39;, &#39;Paris&#39;, &#39;Rome&#39;])</code></pre>
+<p>When you are done you can compare the results with a more <a href="https://en.wikipedia.org/wiki/Geographical_distance#Spherical_Earth_projected_to_a_plane">precise formula</a>:</p>
+<p><span class="math display">\[D=6371.009\sqrt{(\Delta\phi)^2 + (\cos(\phi_m)\Delta\lambda)^2}\]</span></p>
+<p>where <span class="math inline">\(\phi_m = (\phi_1+\phi_2) / 2\)</span> is the mean longitude.</p>
 </div>
 </section>
         </div>

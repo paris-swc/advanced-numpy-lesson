@@ -73,4 +73,23 @@ minutes: 30
 
 > ## Distances {.challenge}
 > 
-> Given an array of latitudes and longitudes of major European capital calculate pairwise distances between them.
+> Given an array of latitudes and longitudes of major European capitals calculate pairwise distances between them. Use the approximate formula: 
+>
+> $$D=6371.009\sqrt{(\Delta\phi)^2 + (\Delta\lambda)^2}\qquad \text{(in kilometers)},$$
+>
+> where $\Delta\phi=\phi_1-\phi_2$ and $\Delta\lambda=\lambda_1-\lambda_2$ are the differences between the latitudes and longitude of two cities in radians. (*Hint*: To convert degrees to radians multiply them by $\pi/180$).
+> ```
+> coords = np.array([
+>                   [ 23.71666667,  37.96666667],
+>                   [ 13.38333333,  52.51666667],
+>                   [ -0.1275    ,  51.50722222],
+>                   [ -3.71666667,  40.38333333],
+>                   [  2.3508    ,  48.8567    ],
+>                   [ 12.5       ,  41.9       ]])
+> names = np.array(['Athens', 'Berlin', 'London', 'Madrid', 'Paris', 'Rome'])
+> ```
+> When you are done you can compare the results with a more [precise formula](https://en.wikipedia.org/wiki/Geographical_distance#Spherical_Earth_projected_to_a_plane):
+>
+> $$D=6371.009\sqrt{(\Delta\phi)^2 + (\cos(\phi_m)\Delta\lambda)^2}$$
+>
+> where $\phi_m = (\phi_1+\phi_2) / 2$ is the mean longitude.
