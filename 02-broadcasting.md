@@ -1,8 +1,8 @@
 ---
 layout: page
 title: Advanced NumPy 
-subtitle: Operations on NumPy arrays
-minutes: 5
+subtitle: Broadcasting 
+minutes: 30
 ---
 > ## Learning Objectives {.objectives}
 >
@@ -70,3 +70,7 @@ minutes: 5
 > ```
 > 
 > What might be the advantage of using `np.ogrid` over `np.mgrid`?
+
+> ## Distances {.challenge}
+> 
+> Given an array of latitudes and longitudes of major European capital calculate pairwise distances between them.

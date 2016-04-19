@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+    <title>Software Carpentry: Advanced NumPy</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/swc.css" />
+    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
+    <meta charset="UTF-8" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body class="lesson">
+    <div class="container card">
+      <div class="banner">
+        <a href="http://software-carpentry.org" title="Software Carpentry">
+          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" />
+        </a>
+      </div>
+      <article>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+                    <a href="index.html"><h1 class="title">Advanced NumPy</h1></a>
+          <h2 class="subtitle">Array container</h2>
+          <section class="objectives panel panel-warning">
+<div class="panel-heading">
+<h2 id="learning-objectives"><span class="glyphicon glyphicon-certificate"></span>Learning Objectives</h2>
+</div>
+<div class="panel-body">
+<p>After the lesson learner:</p>
+<p>Learning objectives:</p>
+<ul>
+<li>Can list some of the object types which can be contained in an array.</li>
+<li>Understands the concept of <code>dtype</code> and can select <code>dtype</code> best for the data at hand.</li>
+<li>Knows what is an object array and when it is created.</li>
+<li>Can explain what are <code>ndim</code>, <code>shape</code> and <code>stride</code> properties of an array.</li>
+<li>Understand the layout of an array in memory and knows how to use it for best array performance.</li>
+<li>Can explain the difference between Fortran- and C-based order. Knows the default.</li>
+</ul>
+</div>
+</section>
+<h3 id="dtype"><code>dtype</code></h3>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="integer-or-real-number"><span class="glyphicon glyphicon-pencil"></span>Integer or real number?</h2>
+</div>
+<div class="panel-body">
+<p>Construct the array <code>x = np.array([0, 1, 2, 3], dtype=np.uint8)</code> (here, <code>uint8</code> represents a single byte in memory, an unsigned integer between 0 and 255). Can you explain the results obtained by x + 1 and x / 2? Also try <code>x.astype(float) + 1</code> and <code>x.astype(float) / 2</code>.</p>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="data-types"><span class="glyphicon glyphicon-pencil"></span>Data types</h2>
+</div>
+<div class="panel-body">
+<p>What is the dtype of the following arrays?</p>
+<pre><code>a = np.array([[1], 
+              [2,3],
+              [4,5,6]])
+b = np.array([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])
+c = np.array([1, 2., 3.])
+d = np.array([np.dot, np.array])</code></pre>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="complex-data-types"><span class="glyphicon glyphicon-pencil"></span>Complex data types</h2>
+</div>
+<div class="panel-body">
+<p>Imagine you have a list of names and scores, which you want to store in numpy array. Construct a dtype such that the following works. Look at documentation of <code>np.dtype</code>.</p>
+<pre><code>dtype = ?
+np.array([(&#39;Bartosz&#39;, 5), (&#39;Nelle&#39;, 4)], dtype=dtype)</code></pre>
+</div>
+</section>
+<h3 id="memory-layout">Memory layout</h3>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="transpose"><span class="glyphicon glyphicon-pencil"></span>Transpose</h2>
+</div>
+<div class="panel-body">
+<p>Create 3x4 random array. Have a look at its different properties: <code>x.shape</code>, <code>x.ndim</code>, <code>x.dtype</code>, <code>x.strides</code>. What does each property tell you about the array?</p>
+<p>Compare the strides property of x.T to the above. What is x.T and can you explain the new strides?</p>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="fastest-changing-index"><span class="glyphicon glyphicon-pencil"></span>Fastest changing index</h2>
+</div>
+<div class="panel-body">
+<p>Compare the time of summing over rows and columns of an array <code>A = np.random.rand(10, 100000)</code>. How would you explain the differences?</p>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="sliding-window"><span class="glyphicon glyphicon-pencil"></span>Sliding window</h2>
+</div>
+<div class="panel-body">
+<p>Use <code>as_strided</code> to produce a sliding-window view of a 1D array.</p>
+<pre><code>def sliding_window(arr, size=2):
+    &quot;&quot;&quot;Produce an array of sliding window views of `arr`
+    
+    Parameters
+    ----------
+    arr : 1D array, shape (N,)
+        The input array.
+    size : int, optional
+        The size of the sliding window.
+        
+    Returns
+    -------
+    arr_slide : 2D array, shape (N - size - 1, size)
+        The sliding windows of size `size` of `arr`.
+        
+    Examples
+    --------
+    &gt;&gt;&gt; a = np.array([0, 1, 2, 3])
+    &gt;&gt;&gt; sliding_window(a, 2)
+    array([[0, 1],
+           [1, 2],
+           [2, 3]])
+    &quot;&quot;&quot;
+    return arr  # fix this</code></pre>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="fortran-or-c-ordering"><span class="glyphicon glyphicon-pencil"></span>Fortran or C-ordering?</h2>
+</div>
+<div class="panel-body">
+<p>The <code>order</code> keyword of some <code>numpy</code> functions determines how two- or more dimensional arrays are laid out in the memory. If order is ‘C’, then the array will be in C-contiguous order (last-index varies the fastest). If order is ‘F’, then the returned array will be in Fortran-contiguous order (first-index varies the fastest). In what order will be the 2D array stored in memory? (<em>Hint</em>: You can use <code>np.ravel(x, order='A')</code> to test it).</p>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="broadcasting-revisited"><span class="glyphicon glyphicon-pencil"></span>Broadcasting revisited</h2>
+</div>
+<div class="panel-body">
+<p>Explain how broadcasting works internally using the example below. What will be shapes and strides of <code>x</code> and <code>y</code> after broadcasting. Test it using <code>np.broadcast_arrays</code> in the following example and look at <code>strides</code> and <code>shape</code> properties of both arrays.</p>
+</div>
+</section>
+        </div>
+      </div>
+      </article>
+      <div class="footer">
+        <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
+        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/lesson-template">Source</a>
+        <a class="label swc-blue-bg" href="mailto:admin@software-carpentry.org">Contact</a>
+        <a class="label swc-blue-bg" href="LICENSE.html">License</a>
+      </div>
+    </div>
+    <!-- Javascript placed at the end of the document so the pages load faster -->
+    <script src="http://software-carpentry.org/v5/js/jquery-1.9.1.min.js"></script>
+    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+  </body>
+</html>

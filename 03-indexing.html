@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+    <title>Software Carpentry: Advanced NumPy</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/swc.css" />
+    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
+    <meta charset="UTF-8" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body class="lesson">
+    <div class="container card">
+      <div class="banner">
+        <a href="http://software-carpentry.org" title="Software Carpentry">
+          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" />
+        </a>
+      </div>
+      <article>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+                    <a href="index.html"><h1 class="title">Advanced NumPy</h1></a>
+          <h2 class="subtitle">Indexing</h2>
+          <section class="objectives panel panel-warning">
+<div class="panel-heading">
+<h2 id="learning-objectives"><span class="glyphicon glyphicon-certificate"></span>Learning Objectives</h2>
+</div>
+<div class="panel-body">
+<p>After the lesson learner:</p>
+<ul>
+<li>Can get the value of any element of a N-dimensional array knowing its row, column etc.</li>
+<li>Can use slices to get and modify ranges of elements.</li>
+<li>Can explain the difference between a copy and a view. Knows which methods of indexing return a copy or view.</li>
+<li>Knows how to select elements from an array based on some criteria applied to their values.</li>
+<li>Can obtain a sub-array of non-contiguous of elements using fancy indexing.</li>
+<li>Can combine axis-based reductions, broadcasting and indexing to implement simple clustering algorithms.</li>
+<li>Understands what are the advantages of vectorisation and when to use or not use it.</li>
+</ul>
+</div>
+</section>
+<h3 id="integer-indexing-and-slicing">Integer indexing and slicing</h3>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="view-or-copy"><span class="glyphicon glyphicon-pencil"></span>View or copy</h2>
+</div>
+<div class="panel-body">
+<p>Create a 3x4 array of random values (using <code>np.random.rand</code>), and call it <code>x</code>. Create another array as follows: <code>y = x[2]</code>. What happens when you modify <code>y</code> — does <code>x</code> also change? Now try <code>y = x[:2]</code> and modify it’s first element. What happens now?</p>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="checkerboard"><span class="glyphicon glyphicon-pencil"></span>Checkerboard</h2>
+</div>
+<div class="panel-body">
+<p>Create a 8x8 matrix and fill it with a checkerboard pattern</p>
+</div>
+</section>
+<h3 id="boolean-indexing">Boolean indexing</h3>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="rectification"><span class="glyphicon glyphicon-pencil"></span>Rectification</h2>
+</div>
+<div class="panel-body">
+<p>Rectify an array with random numbers from normal distribution (generated with <code>np.random.randn</code>) using boolean indexing.</p>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="criterion-based-selection"><span class="glyphicon glyphicon-pencil"></span>Criterion-based selection</h2>
+</div>
+<div class="panel-body">
+<p>Select odd elements from an integer array.</p>
+</div>
+</section>
+<h3 id="fancy-indexing">Fancy indexing</h3>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="random-elements"><span class="glyphicon glyphicon-pencil"></span>Random elements</h2>
+</div>
+<div class="panel-body">
+<p>Using fancy indexing Select randomly with repetition 10 elements from an array of 100 elements.</p>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="broadcasting-indices"><span class="glyphicon glyphicon-pencil"></span>Broadcasting indices</h2>
+</div>
+<div class="panel-body">
+<p>Predict and verify the shape of the following operation.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> np.empty((<span class="dv">10</span>, <span class="dv">8</span>, <span class="dv">6</span>))
+
+idx0 <span class="op">=</span> np.zeros((<span class="dv">3</span>, <span class="dv">8</span>)).astype(<span class="bu">int</span>)
+idx1 <span class="op">=</span> np.zeros((<span class="dv">3</span>, <span class="dv">1</span>)).astype(<span class="bu">int</span>)
+idx2 <span class="op">=</span> np.zeros((<span class="dv">1</span>, <span class="dv">1</span>)).astype(<span class="bu">int</span>)
+
+x[idx0, idx1, idx2]</code></pre></div>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="sub-arrays"><span class="glyphicon glyphicon-pencil"></span>Sub-arrays</h2>
+</div>
+<div class="panel-body">
+<p>Let <code>x = np.array([1, 5, 10])</code>.</p>
+<p>Which of the following will show [1, 10]:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><code>print(x[::2])</code></p></li>
+<li><p><code>print(x[[0, 2]])</code></p></li>
+<li><p><code>x[1, 3]</code></p></li>
+<li><p><code>x[[1, -1]]</code></p></li>
+<li><p><code>x[[False, True, False]]</code></p></li>
+</ol>
+<p>For each statement predict whether it returns a copy or a view.</p>
+</div>
+</section>
+<h3 id="k-mean-clustering">K-mean clustering</h3>
+        </div>
+      </div>
+      </article>
+      <div class="footer">
+        <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
+        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/lesson-template">Source</a>
+        <a class="label swc-blue-bg" href="mailto:admin@software-carpentry.org">Contact</a>
+        <a class="label swc-blue-bg" href="LICENSE.html">License</a>
+      </div>
+    </div>
+    <!-- Javascript placed at the end of the document so the pages load faster -->
+    <script src="http://software-carpentry.org/v5/js/jquery-1.9.1.min.js"></script>
+    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+  </body>
+</html>

@@ -26,38 +26,38 @@
       <article>
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-                    <h1 class="title">Advanced NumPy</h1>
-          <section class="prereq panel panel-warning">
+                    <a href="index.html"><h1 class="title">Advanced NumPy</h1></a>
+          <h2 class="subtitle">Operations on NumPy arrays</h2>
+          <section class="objectives panel panel-warning">
 <div class="panel-heading">
-<h2 id="prerequisites"><span class="glyphicon glyphicon-education"></span>Prerequisites</h2>
+<h2 id="learning-objectives"><span class="glyphicon glyphicon-certificate"></span>Learning Objectives</h2>
 </div>
 <div class="panel-body">
-<p>This lesson covers advanced features of NumPy. If you know how to create a NumPy array and can explain how it differs from a Python list, you are ready to go.</p>
-<p>If you know how to use array broadcasting and indexing to accelerate your code, the lecture will be probably too basic.</p>
-</div>
-</section>
-<section class="getready panel panel-warning">
-<div class="panel-heading">
-<h2 id="getting-ready"><span class="glyphicon glyphicon-check"></span>Getting ready</h2>
-</div>
-<div class="panel-body">
-<p>Make sure that you have a working installation of NumPy.</p>
-</div>
-</section>
-<h2 id="topics">Topics</h2>
-<ol style="list-style-type: decimal">
-<li><a href="00-intro.html">Introduction</a></li>
-<li><a href="01-operations.html">Operations on NumPy arrays</a></li>
-<li><a href="02-broadcasting.html">Broadcasting</a></li>
-<li><a href="03-indexing.html">Indexing</a></li>
-<li><a href="04-container.html">Array container</a></li>
-</ol>
-<h2 id="other-resources">Other Resources</h2>
+<p>After the lesson learner:</p>
 <ul>
-<li><a href="reference.html">Reference</a></li>
-<li><a href="discussion.html">Discussion</a></li>
-<li><a href="instructors.html">Instructor’s Guide</a></li>
+<li>Knows how to add a scalar to all elements of an array.</li>
+<li>Can predict the result of additions of matrices and row or column vectors.</li>
+<li>Can explain why broadcasting is better than using for loops.</li>
+<li>Understands the rules of broadcasting and can predict the shape of broadcasted arrays.</li>
+<li>Knows how to control broadcasting using <code>np.newaxis</code> object.</li>
 </ul>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="normalising-data"><span class="glyphicon glyphicon-pencil"></span>Normalising data</h2>
+</div>
+<div class="panel-body">
+<p>Calculate Z-score for each row of a 10x100 matrix.</p>
+</div>
+</section>
+<blockquote>
+<h2 id="three-dimensional-broadcasting">Three-dimensional broadcasting</h2>
+<p>Below, produce the array containing the sum of every element in <code>x</code> with every element in <code>y</code></p>
+<pre><code>x = np.random.rand(3, 5)
+y = np.random.randint(10, size=8)
+z = x # FIX THIS</code></pre>
+</blockquote>
         </div>
       </div>
       </article>

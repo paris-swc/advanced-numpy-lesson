@@ -21,6 +21,8 @@ title: Advanced NumPy
 1.  [Introduction](00-intro.html)
 2.  [Operations on NumPy arrays](01-operations.html)
 3.  [Broadcasting](02-broadcasting.html)
+4.  [Indexing](03-indexing.html)
+5.  [Array container](04-container.html)
 
 ## Other Resources
 
