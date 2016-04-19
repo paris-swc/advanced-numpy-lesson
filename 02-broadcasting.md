@@ -231,7 +231,7 @@ array([[ 0.        ,  1.        ,  2.        ,  3.        ,  4.        ],
 >
 > $$D=6371.009\sqrt{(\Delta\phi)^2 + (\cos(\phi_m)\Delta\lambda)^2}$$
 >
-> where $\phi_m = (\phi_1+\phi_2) / 2$ is the mean longitude.
+> where $\phi_m = (\phi_1+\phi_2) / 2$ is the mean latitude.
 
 
 
