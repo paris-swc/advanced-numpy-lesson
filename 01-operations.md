@@ -11,13 +11,6 @@ minutes: 5
 > * Learner find a specialised numerical algorithm from the ones available in numpy.
 > * Learner will be able to use from several sorting routines.
 
-> ## Creating a square array {.challenge}
->
-> Create a 5x5 square array with number 5 on diagonal and zeros otherwise. Consider using `np.eye` function (you can check the docstring).
-
-> ## Generating random sequences {.challenge}
->
-> Generate a random sequence of 10 integers from 1 to 100 without repetition (you may want to use `np.random.rand` and `np.argsort`).
 
 > ## Finding closest element {.challenge}
 >

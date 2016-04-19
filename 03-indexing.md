@@ -46,6 +46,10 @@ minutes: 45
 >
 > Using fancy indexing Select randomly with repetition 10 elements from an array of 100 elements.
 
+> ## Drawing random integers without repetition {.challenge}
+>
+> Generate a random sequence of 10 integers from 1 to 100 without repetition (you may want to use `np.random.rand` and `np.argsort`).
+
 > ## Broadcasting indices {.challenge}
 >
 >Predict and verify the shape of the following operation.
