@@ -59,7 +59,7 @@ array([[0, 1, 2],
        [3, 4, 5]])
 &gt;&gt;&gt; b[1, 2]
 5</code></pre>
-<p>Slicing allows to extract sub-arrays of multiple elements from the array. It’s defined by three integers separated by a colon, e.g. start:end:increment. Any of the values can be skipped in which case they are replaced by defaults (0 for start, -1 for end and 1 for increment):</p>
+<p>Slicing allows to extract sub-arrays of multiple elements from the array. It’s defined by three integers separated by a colon, i.e. <code>start:end:increment</code>. Any of the values can be skipped in which case they are replaced by defaults (0 for start, -1 for end and 1 for increment):</p>
 <pre><code>&gt;&gt;&gt; c = np.arange(9)
 &gt;&gt;&gt; c[1:3]
 array([1, 2])
@@ -86,7 +86,11 @@ array([   0, 1000,    2, 1000,    4, 1000,    6, 1000,    8])</code></pre>
 <h2 id="checkerboard"><span class="glyphicon glyphicon-pencil"></span>Checkerboard</h2>
 </div>
 <div class="panel-body">
-<p>Create a 8x8 matrix and fill it with a checkerboard pattern</p>
+<p>Create an array of zeros and fill it with a checkerboard pattern with of size 8x8.</p>
+<div class="figure">
+<img src="fig/checkerboard.svg" />
+
+</div>
 </div>
 </section>
 <h3 id="boolean-mask">Boolean mask</h3>

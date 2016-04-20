@@ -39,7 +39,7 @@ array([[0, 1, 2],
 5
 ```
 
-Slicing allows to extract sub-arrays of multiple elements from the array. It's defined by three integers separated by a colon, e.g. start:end:increment. Any of the values can be skipped in which case they are replaced by defaults (0 for start, -1 for end and 1 for increment):
+Slicing allows to extract sub-arrays of multiple elements from the array. It's defined by three integers separated by a colon, i.e. `start:end:increment`. Any of the values can be skipped in which case they are replaced by defaults (0 for start, -1 for end and 1 for increment):
 
 ```
 >>> c = np.arange(9)
@@ -70,7 +70,9 @@ array([   0, 1000,    2, 1000,    4, 1000,    6, 1000,    8])
 
 > ## Checkerboard {.challenge}
 >
-> Create a 8x8 matrix and fill it with a checkerboard pattern
+> Create an array of zeros and fill it with a checkerboard pattern with of size 8x8.
+>
+> ![](fig/checkerboard.svg)
 
 ### Boolean mask
 
