@@ -206,6 +206,8 @@ array([[3, 4],
 
 ### K-means clustering
 
-K-means is a simple clustering algorithm.
+K-means is a simple algorithm to cluster data that is to identify groups of similar objects based only on their properties. The algorithm is best-illustrated by the following graph.
 
 ![](fig/kmeans_illustration.png)
+
+
