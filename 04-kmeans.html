@@ -54,7 +54,7 @@ centers <span class="op">=</span> np.array([[  <span class="dv">2</span>, <span 
                     [  <span class="dv">3</span>, <span class="dv">2</span>],
                     [<span class="fl">2.8</span>, <span class="dv">3</span>]])
 noise <span class="op">=</span> <span class="fl">0.1</span> <span class="op">*</span> np.random.randn(<span class="dv">100</span>, <span class="dv">3</span>, <span class="dv">2</span>)</code></pre></div>
-<p>We will take advantage of broadcasting to move the clusters to their centers:</p>
+<p>We will take advantage of <strong>broadcasting</strong> to move the clusters to their centers:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">clusters <span class="op">=</span> noise <span class="op">+</span> centers</code></pre></div>
 <p>The K-means algorithm should be naive about the identity of the clusters. So we merge all clusters together using <code>reshape</code> and shuffle the points:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">data <span class="op">=</span> clusters.reshape(<span class="dv">100</span> <span class="op">*</span> <span class="dv">3</span>, <span class="dv">2</span>)
@@ -80,7 +80,7 @@ plt.scatter(k_centers[:, <span class="dv">0</span>], k_centers[:, <span class="d
 <p>We now need to assign each point to the closest cluster center. First, we will calculate the Euclidean distance of each point to each of the centers. For this we can use the <strong>broadcasting</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">deltas <span class="op">=</span> data[np.newaxis, :, :] <span class="op">-</span> k_centers[:, np.newaxis, :]
 center_distance <span class="op">=</span> np.sqrt(np.<span class="bu">sum</span>(deltas<span class="op">**</span><span class="dv">2</span>, <span class="dv">2</span>))</code></pre></div>
-<p>For each data point we find the center with minimum distance. We can use the <code>argmin</code> method with the axis argument:</p>
+<p>For each data point we find the center with minimum distance. We can use the <code>argmin</code> method with the <strong>axis argument</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">closest_center <span class="op">=</span> center_distance.argmin(<span class="dv">0</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">plt.scatter(data[:, <span class="dv">0</span>], data[:, <span class="dv">1</span>], c<span class="op">=</span>closest_center)
 cluster_colors <span class="op">=</span> np.arange(<span class="dv">3</span>)

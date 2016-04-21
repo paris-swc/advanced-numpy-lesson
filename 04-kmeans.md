@@ -32,7 +32,7 @@ centers = np.array([[  2, 3],
 noise = 0.1 * np.random.randn(100, 3, 2)
 ```
 
-We will take advantage of broadcasting to move the clusters to their centers:
+We will take advantage of **broadcasting** to move the clusters to their centers:
 
 ```python
 clusters = noise + centers
@@ -82,7 +82,7 @@ deltas = data[np.newaxis, :, :] - k_centers[:, np.newaxis, :]
 center_distance = np.sqrt(np.sum(deltas**2, 2))
 ```
 
-For each data point we find the center with minimum distance. We can use the `argmin` method with the axis argument:
+For each data point we find the center with minimum distance. We can use the `argmin` method with the **axis argument**:
 
 
 ```python
