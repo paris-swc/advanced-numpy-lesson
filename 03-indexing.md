@@ -204,10 +204,3 @@ array([[3, 4],
 >
 > For each statement predict whether it returns a copy or a view.
 
-### K-means clustering
-
-K-means is a simple algorithm to cluster data that is to identify groups of similar objects based only on their properties. The algorithm is best-illustrated by the following graph.
-
-![](fig/kmeans_illustration.png)
-
-
