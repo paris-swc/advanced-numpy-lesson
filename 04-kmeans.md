@@ -5,6 +5,13 @@ subtitle: "Case study: K-means"
 minutes: 45
 ---
 
+> ## Learning objectives {.objectives}
+>
+> After the lesson the learner should:
+>
+> * Be able to combine axis-based reductions, broadcasting and indexing to implement simple clustering algorithms.
+> * Understand what are the advantages of vectorisation and when to use or not use it.
+
 K-means is a simple algorithm to cluster data that is to identify groups of similar objects based only on their properties. The algorithm is best-illustrated by the following graph.
 
 ![](fig/kmeans/kmeans_illustration.png)

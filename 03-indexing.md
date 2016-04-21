@@ -13,8 +13,6 @@ minutes: 45
 > * Can explain the difference between a copy and a view. Knows which methods of indexing return a copy or view.
 > * Knows how to select elements from an array based on some criteria applied to their values.
 > * Can obtain a sub-array of non-contiguous of elements using fancy indexing.
-> * Can combine axis-based reductions, broadcasting and indexing to implement simple clustering algorithms.
-> * Understands what are the advantages of vectorisation and when to use or not use it.
 
 ### Integer indexing and slicing
 
