@@ -157,6 +157,30 @@ array([   0,   10,   20,   30,   40,   50,   60, -100,   80, -100])</code></pre>
 &gt;&gt;&gt; a[idx]
 array([[3, 4],
        [9, 7]])</code></pre>
+<p>Fancy indexing is often used to re-order or sort data. You can easily obtain the indices required to sort data using <code>np.argsort</code>:</p>
+<pre><code>&gt;&gt;&gt; a = np.random.randint(10, size=5)
+&gt;&gt;&gt; a
+array([4, 0, 6, 1, 2])
+&gt;&gt;&gt; i = np.argsort(a)
+&gt;&gt;&gt; a[i]
+array([0, 1, 2, 4, 6])</code></pre>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="sub-arrays"><span class="glyphicon glyphicon-pencil"></span>Sub-arrays</h2>
+</div>
+<div class="panel-body">
+<p>Let <code>x = np.array([1, 5, 10])</code>.</p>
+<p>Which of the following will show [1, 10]:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><code>print(x[::2])</code></p></li>
+<li><p><code>print(x[[0, 2]])</code></p></li>
+<li><p><code>x[1, 3]</code></p></li>
+<li><p><code>x[[1, -1]]</code></p></li>
+<li><p><code>x[[False, True, False]]</code></p></li>
+</ol>
+<p>For each statement predict whether it returns a copy or a view.</p>
+</div>
+</section>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="random-elements"><span class="glyphicon glyphicon-pencil"></span>Random elements</h2>
@@ -186,23 +210,6 @@ idx1 <span class="op">=</span> np.zeros((<span class="dv">3</span>, <span class=
 idx2 <span class="op">=</span> np.zeros((<span class="dv">1</span>, <span class="dv">1</span>)).astype(<span class="bu">int</span>)
 
 x[idx0, idx1, idx2]</code></pre></div>
-</div>
-</section>
-<section class="challenge panel panel-success">
-<div class="panel-heading">
-<h2 id="sub-arrays"><span class="glyphicon glyphicon-pencil"></span>Sub-arrays</h2>
-</div>
-<div class="panel-body">
-<p>Let <code>x = np.array([1, 5, 10])</code>.</p>
-<p>Which of the following will show [1, 10]:</p>
-<ol style="list-style-type: lower-alpha">
-<li><p><code>print(x[::2])</code></p></li>
-<li><p><code>print(x[[0, 2]])</code></p></li>
-<li><p><code>x[1, 3]</code></p></li>
-<li><p><code>x[[1, -1]]</code></p></li>
-<li><p><code>x[[False, True, False]]</code></p></li>
-</ol>
-<p>For each statement predict whether it returns a copy or a view.</p>
 </div>
 </section>
         </div>

@@ -12,6 +12,16 @@ minutes: 5
 > * Learner will be able to use from several sorting routines.
 
 
+### Multiplication by scalar and array
+
+### Reshaping
+
+`np.reshape`
+
+### Axis-based reductions
+
+### Special modules
+
 > ## Finding closest element {.challenge}
 >
 > Generate a 10 x 3 array of random numbers. From each row, pick the number closest to 0.75. Make use of `np.abs` and `np.argmax` to find the column j which contains the closest element in each row.

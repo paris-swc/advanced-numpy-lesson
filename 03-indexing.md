@@ -162,27 +162,16 @@ array([[3, 4],
        [9, 7]])
 ```
 
-> ## Random elements {.challenge}
->
-> Using fancy indexing Select randomly with repetition 10 elements from an array of 100 elements.
+Fancy indexing is often used to re-order or sort data. You can easily obtain the indices required to sort data using `np.argsort`:
 
-> ## Drawing random integers without repetition {.challenge}
->
-> Generate a random sequence of 10 integers from 1 to 100 without repetition (you may want to use `np.random.rand` and `np.argsort`).
-
-> ## Broadcasting indices {.challenge}
->
->Predict and verify the shape of the following operation.
-> 
-> ```python
-> x = np.empty((10, 8, 6))
-> 
-> idx0 = np.zeros((3, 8)).astype(int)
-> idx1 = np.zeros((3, 1)).astype(int)
-> idx2 = np.zeros((1, 1)).astype(int)
-> 
-> x[idx0, idx1, idx2]
-> ```
+```
+>>> a = np.random.randint(10, size=5)
+>>> a
+array([4, 0, 6, 1, 2])
+>>> i = np.argsort(a)
+>>> a[i]
+array([0, 1, 2, 4, 6])
+```
 
 > ## Sub-arrays {.challenge}
 > 
@@ -201,4 +190,27 @@ array([[3, 4],
 > e) `x[[False, True, False]]`
 >
 > For each statement predict whether it returns a copy or a view.
+
+
+> ## Random elements {.challenge}
+>
+> Using fancy indexing Select randomly with repetition 10 elements from an array of 100 elements.
+
+> ## Drawing random integers without repetition {.challenge}
+>
+> Generate a random sequence of 10 integers from 1 to 100 without repetition (you may want to use `np.random.rand` and `np.argsort`).
+
+> ## Broadcasting indices {.challenge}
+>
+> Predict and verify the shape of the following operation.
+> 
+> ```python
+> x = np.empty((10, 8, 6))
+> 
+> idx0 = np.zeros((3, 8)).astype(int)
+> idx1 = np.zeros((3, 1)).astype(int)
+> idx2 = np.zeros((1, 1)).astype(int)
+> 
+> x[idx0, idx1, idx2]
+> ```
 

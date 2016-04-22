@@ -10,6 +10,18 @@ minutes: 5
 > * Learner will be able to create one- and more dimensional arrays with zeros/ones, given elements or random elements. 
 > * Learner will be able to apply a function to all elements of an array.
 
+### Creating arrays 
+
+`np.array`, `np.ones`, `np.zeros`, `np.arange`
+
+### ufuncs
+
+`np.sqrt`, `np.abs`
+
+### Random arrays
+
+`np.random.rand`, `np.random.randn`, `np.random.randint`
+
 > ## Creating a square array {.challenge}
 >
 > Create a 5x5 square array with number 5 on diagonal and zeros otherwise. Consider using `np.eye` function (you can check the docstring).
