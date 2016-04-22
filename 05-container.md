@@ -90,7 +90,53 @@ array([[1], [2, 3]], dtype=object)
 
 ### Memory layout
 
+NumPy array is just a memory block with extra information how to interpret its contents. Since memory has only linear address space, NumPy arrays need extra information how to lay out this block into multiple dimensions. This is done by means of `shape`  and `strides` attributes:
+
 ![Shape and strides](fig/strides.svg)
+
+Lets try to reproduce this example. We first generate a 1D NumPy array of 8 elements:
+
+```
+>>> a = np.arange(8, dtype=np.uint8)
+>>> a
+array([0, 1, 2, 3, 4, 5, 6, 7], dtype=uint8)
+>>> a.strides
+(1,)
+>>> a.shape
+(8,)
+```
+
+`shape` and `strides` attributes are read-only, so we can not modify them directly. However, we my use 
+`as_strided` function from NumPy library module:
+
+```
+>>> a1 = np.lib.stride_tricks.as_strided(a, strides=(4, 1), shape=(2,4))
+>>> a1
+array([[0, 1, 2, 3],
+       [4, 5, 6, 7]], dtype=uint8)
+```
+
+Similarly, we can obtain the second example:
+```
+>>> a2 = np.lib.stride_tricks.as_strided(a, strides=(2, 1), shape=(3,4))
+>>> a2
+array([[0, 1, 2, 3],
+       [2, 3, 4, 5],
+       [4, 5, 6, 7]], dtype=uint8)
+```
+
+Note that in the second case the same data appears twice. However, it does not consume extra memory -- all three arrays share the same memory block:
+
+```
+>>> a[2] = 100
+>>> a1
+array([[  0,   1, 100,   3],
+       [  4,   5,   6,   7]], dtype=uint8)
+>>> a2
+array([[  0,   1, 100,   3],
+       [100,   3,   4,   5],
+       [  4,   5,   6,   7]], dtype=uint8)
+```
 
 > ## Transpose {.challenge}
 >

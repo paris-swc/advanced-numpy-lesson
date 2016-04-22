@@ -101,10 +101,39 @@ np.array([(&#39;Bartosz&#39;, 5), (&#39;Nelle&#39;, 4)], dtype=dtype)</code></pr
 </div>
 </section>
 <h3 id="memory-layout">Memory layout</h3>
+<p>NumPy array is just a memory block with extra information how to interpret its contents. Since memory has only linear address space, NumPy arrays need extra information how to lay out this block into multiple dimensions. This is done by means of <code>shape</code> and <code>strides</code> attributes:</p>
 <div class="figure">
 <img src="fig/strides.svg" alt="Shape and strides" />
 <p class="caption">Shape and strides</p>
 </div>
+<p>Lets try to reproduce this example. We first generate a 1D NumPy array of 8 elements:</p>
+<pre><code>&gt;&gt;&gt; a = np.arange(8, dtype=np.uint8)
+&gt;&gt;&gt; a
+array([0, 1, 2, 3, 4, 5, 6, 7], dtype=uint8)
+&gt;&gt;&gt; a.strides
+(1,)
+&gt;&gt;&gt; a.shape
+(8,)</code></pre>
+<p><code>shape</code> and <code>strides</code> attributes are read-only, so we can not modify them directly. However, we my use <code>as_strided</code> function from NumPy library module:</p>
+<pre><code>&gt;&gt;&gt; a1 = np.lib.stride_tricks.as_strided(a, strides=(4, 1), shape=(2,4))
+&gt;&gt;&gt; a1
+array([[0, 1, 2, 3],
+       [4, 5, 6, 7]], dtype=uint8)</code></pre>
+<p>Similarly, we can obtain the second example:</p>
+<pre><code>&gt;&gt;&gt; a2 = np.lib.stride_tricks.as_strided(a, strides=(2, 1), shape=(3,4))
+&gt;&gt;&gt; a2
+array([[0, 1, 2, 3],
+       [2, 3, 4, 5],
+       [4, 5, 6, 7]], dtype=uint8)</code></pre>
+<p>Note that in the second case the same data appears twice. However, it does not consume extra memory – all three arrays share the same memory block:</p>
+<pre><code>&gt;&gt;&gt; a[2] = 100
+&gt;&gt;&gt; a1
+array([[  0,   1, 100,   3],
+       [  4,   5,   6,   7]], dtype=uint8)
+&gt;&gt;&gt; a2
+array([[  0,   1, 100,   3],
+       [100,   3,   4,   5],
+       [  4,   5,   6,   7]], dtype=uint8)</code></pre>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="transpose"><span class="glyphicon glyphicon-pencil"></span>Transpose</h2>
