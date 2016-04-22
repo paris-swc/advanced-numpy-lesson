@@ -17,7 +17,47 @@ minutes: 45
 > * Understand the layout of an array in memory and knows how to use it for best array performance.
 > * Can explain the difference between Fortran- and C-based order. Knows the default.
 
-### `dtype`
+### Data type 
+
+In contrast to built-in Python containers (like lists) the contents of NumPy arrays are statically **typed**, i.e. they can store elements only in specific format. To see the type of array contents you can use the `dtype` attribute. Let's look at two examples:
+
+```
+>>> a = np.array([1, 2, 3])
+>>> a.dtype
+dtype('int64')
+
+>>> b = np.array([1., 2., 3.])
+>>> b.dtype
+dtype('float64')
+```
+
+In the first case the numbers are 64-bit (8-byte) integers and in the second 64-bit floating point (real)  numbers. Note that NumPy auto-detects the data-type from the input. Different data-types allow us to store data more compactly in memory, but most of the time we simply work with floating point numbers.
+
+Note that all of the elements of an array must be of the same type. If we construct an array with different elements it will be **cast** to the "most general" type that can represent all elements. For example, array constructed from real numbers and integers will have a floating point data type:
+
+```
+>>> a = np.array([1., 2])
+dtype('float64')
+```
+
+In cases it is impossible, NumPy will use an `object` type (also represented by capital `'O'`) which can represent any Python object -- even a function:
+
+```
+>>> def f(): pass
+>>> a = np.array([f, f])
+>>> a.dtype
+dtype('O')
+```
+
+Some of NumPy features (like element-wise functions, `np.abs`, `np.sqrt`, etc., or reductions, `np.sum`, `np.max` etc.) won't work with object arrays, but all types of indexing still work.
+
+`object` type is most commonly encountered when constructing an array from multiple lists of different lengths:
+
+```
+>>> np.array([[1], [2, 3]])
+array([[1], [2, 3]], dtype=object)
+```
+
 
 > ## Integer or real number? {.challenge}
 >
@@ -27,15 +67,16 @@ minutes: 45
 
 > ## Data types {.challenge}
 >
-> What is the dtype of the following arrays?
+> Try to guess the data type of the following arrays. Then test your prediction by  constructing the arrays and check their dtype attribute.
 >
 > ```
-> a = np.array([[1], 
->               [2,3],
->               [4,5,6]])
+> a = np.array([[1, 2], 
+>               [2, 3]])
 > b = np.array(['a', 'b', 'c'])
-> c = np.array([1, 2., 3.])
+> c = np.array([1, 2, 'a'])
 > d = np.array([np.dot, np.array])
+> e = np.random.randn(5) > 0
+> f = np.arange(5)
 > ```
 
 > ## Complex data types {.challenge}
@@ -48,6 +89,8 @@ minutes: 45
 > ```
 
 ### Memory layout
+
+![Shape and strides](fig/strides.svg)
 
 > ## Transpose {.challenge}
 >
