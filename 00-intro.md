@@ -8,6 +8,7 @@ minutes: 5
 >
 > * Learner will know how to import `numpy`
 > * Learner will be able to create one- and more dimensional arrays with zeros/ones, given elements or random elements. 
+> * Learner will be able to apply a function to all elements of an array.
 
 > ## Creating a square array {.challenge}
 >
