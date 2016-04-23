@@ -40,12 +40,36 @@
 </ul>
 </div>
 </section>
-<h3 id="creating-arrays">Creating arrays</h3>
-<p><code>np.array</code>, <code>np.ones</code>, <code>np.zeros</code>, <code>np.arange</code></p>
-<h3 id="ufuncs">ufuncs</h3>
-<p><code>np.sqrt</code>, <code>np.abs</code></p>
-<h3 id="random-arrays">Random arrays</h3>
-<p><code>np.random.rand</code>, <code>np.random.randn</code>, <code>np.random.randint</code></p>
+<p>NumPy array is a data container. It is similar to Python lists, but it’s specialised for working on numerical data and scientific applications. NumPy is at the center of scientific Python ecosystem and it is a work horse of many scientific libraries including scikit-learn, scikit-image, matplotlib, SciPy.</p>
+<p>First we need to import NumPy – it’s customary the use the following import statement, which will make all NumPy functions available under the <code>np</code> prefix:</p>
+<pre><code>import numpy as np</code></pre>
+<p>Let’s create a simple three-element NumPy array:</p>
+<pre><code>&gt;&gt;&gt; x = np.array([2, 1, 5])
+&gt;&gt;&gt; x
+array([2, 1, 5])</code></pre>
+<p>One of the advantages of NumPy is that it allows to apply functions (called <code>ufunc</code>s) to all elements of an array without the need of for loops:</p>
+<pre><code>&gt;&gt;&gt; np.sin(x)
+array([ 0.90929743,  0.84147098, -0.95892427])</code></pre>
+<p>This is not only convenient but also more efficient than working with Python lists directly. Similarly, we can add scalars to all elements or multiply them by a constant:</p>
+<pre><code>&gt;&gt;&gt; x + 1
+array([3, 2, 6])</code></pre>
+<p>To construct an array we can also use one of the built-in functions:</p>
+<pre><code>&gt;&gt;&gt; np.arange(5)
+array([0, 1, 2, 3, 4])
+&gt;&gt;&gt; np.ones(5)
+array([ 1.,  1.,  1.,  1.,  1.])
+&gt;&gt;&gt; np.zeros(5)
+array([ 0.,  0.,  0.,  0.,  0.])
+&gt;&gt;&gt; np.random.rand(5)
+array([ 0.27386612,  0.42769767,  0.38762774,  0.63308478,  0.46215844])</code></pre>
+<p>We can also construct a two- or more dimensional arrays:</p>
+<pre><code>&gt;&gt;&gt; x = np.array([[1, 2], [5, 6]])
+&gt;&gt;&gt; x
+array([[1, 2],
+       [5, 6]])
+&gt;&gt;&gt; np.ones((2, 2))
+array([[ 1.,  1.],
+       [ 1.,  1.]])</code></pre>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="creating-a-square-array"><span class="glyphicon glyphicon-pencil"></span>Creating a square array</h2>

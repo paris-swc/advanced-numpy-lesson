@@ -10,17 +10,61 @@ minutes: 5
 > * Learner will be able to create one- and more dimensional arrays with zeros/ones, given elements or random elements. 
 > * Learner will be able to apply a function to all elements of an array.
 
-### Creating arrays 
+NumPy array is a data container. It is similar to Python lists, but it's specialised for working on numerical data and scientific applications. NumPy is at the center of scientific Python ecosystem and it is a work horse of many scientific libraries including scikit-learn, scikit-image, matplotlib, SciPy.
 
-`np.array`, `np.ones`, `np.zeros`, `np.arange`
+First we need to import NumPy -- it's customary the use the following import statement, which will make all NumPy functions available under the `np` prefix:
 
-### ufuncs
+```
+import numpy as np
+```
 
-`np.sqrt`, `np.abs`
+Let's create a simple three-element NumPy array:
 
-### Random arrays
+```
+>>> x = np.array([2, 1, 5])
+>>> x
+array([2, 1, 5])
+```
 
-`np.random.rand`, `np.random.randn`, `np.random.randint`
+One of the advantages of NumPy is that it allows to apply functions (called `ufunc`s) to all elements of an array without the need of for loops:
+
+```
+>>> np.sin(x)
+array([ 0.90929743,  0.84147098, -0.95892427])
+```
+
+This is not only convenient but also more efficient than working with Python lists directly. Similarly, we can add scalars to all elements or multiply them by a constant:
+
+
+```
+>>> x + 1
+array([3, 2, 6])
+```
+
+To construct an array we can also use one of the built-in functions:
+
+```
+>>> np.arange(5)
+array([0, 1, 2, 3, 4])
+>>> np.ones(5)
+array([ 1.,  1.,  1.,  1.,  1.])
+>>> np.zeros(5)
+array([ 0.,  0.,  0.,  0.,  0.])
+>>> np.random.rand(5)
+array([ 0.27386612,  0.42769767,  0.38762774,  0.63308478,  0.46215844])
+```
+
+We can also construct a two- or more dimensional arrays:
+
+```
+>>> x = np.array([[1, 2], [5, 6]])
+>>> x
+array([[1, 2],
+       [5, 6]])
+>>> np.ones((2, 2))
+array([[ 1.,  1.],
+       [ 1.,  1.]])
+```
 
 > ## Creating a square array {.challenge}
 >
