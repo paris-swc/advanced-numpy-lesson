@@ -77,6 +77,14 @@ plt.scatter(k_centers[:, <span class="dv">0</span>], k_centers[:, <span class="d
 <p class="caption">Randomly initalised cluster centers (color big dots)</p>
 </div>
 <h3 id="assignment">Assignment</h3>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="find-closest-centers"><span class="glyphicon glyphicon-pencil"></span>Find closest centers</h2>
+</div>
+<div class="panel-body">
+<p>Calculate the Euclidean distance between all data points to each of the center and then find the index of the closest center.</p>
+</div>
+</section>
 <p>We now need to assign each point to the closest cluster center. First, we will calculate the Euclidean distance of each point to each of the centers. For this we can use the <strong>broadcasting</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">deltas <span class="op">=</span> data[np.newaxis, :, :] <span class="op">-</span> k_centers[:, np.newaxis, :]
 center_distance <span class="op">=</span> np.sqrt(np.<span class="bu">sum</span>(deltas<span class="op">**</span><span class="dv">2</span>, <span class="dv">2</span>))</code></pre></div>
@@ -104,6 +112,14 @@ plt.scatter(k_centers[:, <span class="dv">0</span>], k_centers[:, <span class="d
     cluster_colors <span class="op">=</span> np.arange(<span class="dv">3</span>)
     plt.scatter(k_centers[:, <span class="dv">0</span>], k_centers[:, <span class="dv">1</span>], c<span class="op">=</span>cluster_colors, s<span class="op">=</span><span class="dv">50</span>)</code></pre></div>
 <h3 id="calculate-new-cluster-centers">Calculate new cluster centers</h3>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="cluster-center"><span class="glyphicon glyphicon-pencil"></span>Cluster center</h2>
+</div>
+<div class="panel-body">
+<p>Given the array of cluster assignments (<code>closest_centers</code> returned by <code>assign</code> function) calculate the center coordinates of the first cluster cluster (index 0).</p>
+</div>
+</section>
 <p>To calculate new centers of the clusters, we average all points belonging to that cluster. We can use a <strong>boolean mask</strong>. For example, to calculate the center of a cluster 0 we will use the following instruction:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">data[closest_center<span class="op">==</span><span class="dv">0</span>, :].mean(<span class="dv">0</span>)</code></pre></div>
 <pre><code>array([ 2.90695091,  2.52099101])</code></pre>

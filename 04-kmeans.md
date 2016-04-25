@@ -74,7 +74,13 @@ plt.scatter(k_centers[:, 0], k_centers[:, 1], c=cluster_colors, s=50)
 
 ### Assignment
 
+> ## Find closest centers {.challenge}
+>
+> Calculate the Euclidean distance between all data points to each of the center and then find the index of the closest center. 
+
 We now need to assign each point to the closest cluster center. First, we will calculate the Euclidean distance of each point to each of the centers. For this we can use the **broadcasting**:
+
+
 
 
 ```python
@@ -118,6 +124,10 @@ def show_clusters(data, k_centers, closest_center):
 ```
 
 ### Calculate new cluster centers
+
+> ## Cluster center {.challenge}
+>
+> Given the array of cluster assignments (`closest_centers` returned by `assign` function) calculate the center coordinates of the first cluster cluster (index 0). 
 
 To calculate new centers of the clusters, we average all points belonging to that cluster. We can use a **boolean mask**. For example, to calculate the center of a cluster 0 we will use the following instruction:
 
