@@ -66,6 +66,21 @@ array([[ 1.,  1.],
        [ 1.,  1.]])
 ```
 
+Alternatively, a n-dimensional array can be obtained by reshaping an array with less (or more) dimensions:
+
+```
+>>> a = np.arange(9)
+>>> a
+array([0, 1, 2, 3, 4, 5, 6, 7, 8])
+>>> a.reshape(3,3)
+array([[0, 1, 2],
+       [3, 4, 5],
+       [6, 7, 8]])
+```
+
+Note that in this case we used a method of the array itself called `reshape` rather than a function from NumPy module (`np.reshape`). Both ways are possible and it's usually only a matter of convenience which one we choose in a particular case.
+
+
 > ## Creating a square array {.challenge}
 >
 > Create a 5x5 square array with number 5 on diagonal and zeros otherwise. Consider using `np.eye` function (you can check the docstring).
