@@ -41,11 +41,71 @@
 </ul>
 </div>
 </section>
-<h3 id="multiplication-by-scalar-and-array">Multiplication by scalar and array</h3>
-<h3 id="reshaping">Reshaping</h3>
-<p><code>np.reshape</code></p>
+<p>Multiplication of two arrays is elementwise. For example, to calculate a square of each element we may use:</p>
+<pre><code>&gt;&gt;&gt; a = np.arange(3)
+&gt;&gt;&gt; a
+array([0, 1, 2])
+&gt;&gt;&gt; b = a * a
+&gt;&gt;&gt; b
+array([0, 1, 4])</code></pre>
+<p>Matrix products are calculated using the <code>np.dot</code> function:</p>
+<pre><code>&gt;&gt;&gt; np.dot(a, a)
+5</code></pre>
+<p>For 1-D arrays the same result can be obtained by:</p>
+<pre><code>&gt;&gt;&gt; np.sum(a * a)
+5</code></pre>
 <h3 id="axis-based-reductions">Axis-based reductions</h3>
+<p>The <code>np.sum</code> function sums all elements regardless of the number of array dimensions:</p>
+<pre><code>&gt;&gt;&gt; b = np.arange(9).reshape(3,3)
+&gt;&gt;&gt; b
+array([[0, 1, 2],
+       [3, 4, 5],
+       [6, 7, 8]])
+&gt;&gt;&gt; np.sum(b)
+36</code></pre>
+<p>If we want to sum only columns or rows, we need to pass the index of the axis over which we want to sum:</p>
+<pre><code>&gt;&gt;&gt; np.sum(b, 0)
+array([ 9, 12, 15])
+&gt;&gt;&gt; np.sum(b, 1)
+array([ 3, 12, 21])</code></pre>
+<p>Other similar reduction functions are <code>np.min</code>, <code>np.max</code> or <code>np.mean</code>:</p>
+<pre><code>&gt;&gt;&gt; np.min(b)
+0
+&gt;&gt;&gt; np.min(b, 0)
+array([0, 1, 2])
+&gt;&gt;&gt; np.min(b, 1)
+array([0, 3, 6])</code></pre>
+<p>We can also find the index of the minimum element in each axis:</p>
+<pre><code>&gt;&gt;&gt; np.argmin(b, 0)
+array([0, 0, 0])</code></pre>
+<h3 id="sorting">Sorting</h3>
+<p>NumPy also implement various sorting algorithms. To sort elements of an array we can simply use <code>np.sort</code> functions:</p>
+<pre><code>&gt;&gt;&gt; a = np.random.rand(4)
+&gt;&gt;&gt; a
+array([ 0.9490829 ,  0.07528673,  0.17463988,  0.95964801])
+&gt;&gt;&gt; np.sort(a)
+array([ 0.07528673,  0.17463988,  0.9490829 ,  0.95964801])</code></pre>
+<p>By default, <code>np.sort</code> flattens the array (make it 1-D) before sorting, but similarly to the reduction functions we can also pass the axis index to sort along:</p>
+<pre><code>&gt;&gt;&gt; b = a.reshape(2, 2)
+&gt;&gt;&gt; b
+array([[ 0.9490829 ,  0.07528673],
+       [ 0.17463988,  0.95964801]])
+&gt;&gt;&gt; np.sort(b, 0)
+array([[ 0.17463988,  0.07528673],
+       [ 0.9490829 ,  0.95964801]])
+&gt;&gt;&gt; np.sort(b, 1)
+array([[ 0.07528673,  0.9490829 ],
+       [ 0.17463988,  0.95964801]])</code></pre>
+<p>We can also find the order in which elements need to be placed to have them sorted:</p>
+<pre><code>&gt;&gt;&gt; np.argsort(a)
+array([1, 2, 0, 3])</code></pre>
 <h3 id="special-modules">Special modules</h3>
+<p>NumPy also provides extra modules implementing basic numerical methods:</p>
+<ul>
+<li><code>np.linalg</code> – linear algebra,</li>
+<li><code>np.fft</code> – fast Fourier transform,</li>
+<li><code>np.random</code> – random number generators.</li>
+</ul>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="finding-closest-element"><span class="glyphicon glyphicon-pencil"></span>Finding closest element</h2>
