@@ -36,8 +36,8 @@
 <ul>
 <li>Learner will explain the difference between element-wise and matrix product of two arrays.</li>
 <li>Learner will apply reduction functions (mean, min, max) along a given axis.</li>
-<li>Learner find a specialised numerical algorithm from the ones available in numpy.</li>
-<li>Learner will be able to use from several sorting routines.</li>
+<li>Learner will be able to find a specialised numerical algorithm from the ones available in numpy.</li>
+<li>Learner will be able to sort array along given axis.</li>
 </ul>
 </div>
 </section>
@@ -63,7 +63,7 @@ array([[0, 1, 2],
        [6, 7, 8]])
 &gt;&gt;&gt; np.sum(b)
 36</code></pre>
-<p>If we want to sum only columns or rows, we need to pass the index of the axis over which we want to sum:</p>
+<p>If you want to sum only columns or rows, you need to pass the index of the axis over which you want to sum:</p>
 <pre><code>&gt;&gt;&gt; np.sum(b, 0)
 array([ 9, 12, 15])
 &gt;&gt;&gt; np.sum(b, 1)
@@ -75,17 +75,17 @@ array([ 3, 12, 21])</code></pre>
 array([0, 1, 2])
 &gt;&gt;&gt; np.min(b, 1)
 array([0, 3, 6])</code></pre>
-<p>We can also find the index of the minimum element in each axis:</p>
+<p>You can also find the index of the minimum element in each axis:</p>
 <pre><code>&gt;&gt;&gt; np.argmin(b, 0)
 array([0, 0, 0])</code></pre>
 <h3 id="sorting">Sorting</h3>
-<p>NumPy also implement various sorting algorithms. To sort elements of an array we can simply use <code>np.sort</code> functions:</p>
+<p>NumPy also implement various sorting algorithms. To sort elements of an array you can use <code>np.sort</code> functions:</p>
 <pre><code>&gt;&gt;&gt; a = np.random.rand(4)
 &gt;&gt;&gt; a
 array([ 0.9490829 ,  0.07528673,  0.17463988,  0.95964801])
 &gt;&gt;&gt; np.sort(a)
 array([ 0.07528673,  0.17463988,  0.9490829 ,  0.95964801])</code></pre>
-<p>By default, <code>np.sort</code> flattens the array (make it 1-D) before sorting, but similarly to the reduction functions we can also pass the axis index to sort along:</p>
+<p>Similarly to the reduction functions, you can also pass the axis index to sort along:</p>
 <pre><code>&gt;&gt;&gt; b = a.reshape(2, 2)
 &gt;&gt;&gt; b
 array([[ 0.9490829 ,  0.07528673],
@@ -96,7 +96,7 @@ array([[ 0.17463988,  0.07528673],
 &gt;&gt;&gt; np.sort(b, 1)
 array([[ 0.07528673,  0.9490829 ],
        [ 0.17463988,  0.95964801]])</code></pre>
-<p>We can also find the order in which elements need to be placed to have them sorted:</p>
+<p><code>np.argsort</code> returns the order of elements in a sorted array:</p>
 <pre><code>&gt;&gt;&gt; np.argsort(a)
 array([1, 2, 0, 3])</code></pre>
 <h3 id="special-modules">Special modules</h3>

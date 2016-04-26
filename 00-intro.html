@@ -40,20 +40,20 @@
 </ul>
 </div>
 </section>
-<p>NumPy array is a data container. It is similar to Python lists, but it’s specialised for working on numerical data and scientific applications. NumPy is at the center of scientific Python ecosystem and it is a work horse of many scientific libraries including scikit-learn, scikit-image, matplotlib, SciPy.</p>
-<p>First we need to import NumPy – it’s customary the use the following import statement, which will make all NumPy functions available under the <code>np</code> prefix:</p>
+<p>NumPy array is a data container. It is similar to Python lists, but it’s specialised for working on numerical data. NumPy is at the center of scientific Python ecosystem and it is a work-horse of many scientific libraries including scikit-learn, scikit-image, matplotlib, SciPy.</p>
+<p>To use NumPy we need to start python interpreter and import <code>numpy</code> package – it’s customary the use the following import statement, which will make all NumPy functions available under the <code>np</code> prefix:</p>
 <pre><code>import numpy as np</code></pre>
-<p>Let’s create a simple three-element NumPy array:</p>
+<p>If <code>numpy</code> was installed correctly, this should not produce any messages. Let’s create a simple three-element NumPy array:</p>
 <pre><code>&gt;&gt;&gt; x = np.array([2, 1, 5])
 &gt;&gt;&gt; x
 array([2, 1, 5])</code></pre>
 <p>One of the advantages of NumPy is that it allows to apply functions (called <code>ufunc</code>s) to all elements of an array without the need of for loops:</p>
 <pre><code>&gt;&gt;&gt; np.sin(x)
 array([ 0.90929743,  0.84147098, -0.95892427])</code></pre>
-<p>This is not only convenient but also more efficient than working with Python lists directly. Similarly, we can add scalars to all elements or multiply them by a constant:</p>
+<p>This is not only convenient but also more efficient than iterating through the elements using for loops. Similarly, we can add scalars to all elements or multiply them by a constant:</p>
 <pre><code>&gt;&gt;&gt; x + 1
 array([3, 2, 6])</code></pre>
-<p>To construct an array we can also use one of the built-in functions:</p>
+<p>To construct an array with pre-defined elements we can also use one of the built-in helper functions. <code>np.arange</code> works like Python built-in <code>range</code>, but it returns an array; <code>np.ones</code> and <code>np.zeros</code> returns arrays of 0s or 1s; <code>np.random.rand</code> creates an array of random number from an interval [0, 1]:</p>
 <pre><code>&gt;&gt;&gt; np.arange(5)
 array([0, 1, 2, 3, 4])
 &gt;&gt;&gt; np.ones(5)
@@ -70,7 +70,7 @@ array([[1, 2],
 &gt;&gt;&gt; np.ones((2, 2))
 array([[ 1.,  1.],
        [ 1.,  1.]])</code></pre>
-<p>Alternatively, a n-dimensional array can be obtained by reshaping an array with less (or more) dimensions:</p>
+<p>Alternatively, a n-dimensional array can be obtained by reshaping a 1-D array:</p>
 <pre><code>&gt;&gt;&gt; a = np.arange(9)
 &gt;&gt;&gt; a
 array([0, 1, 2, 3, 4, 5, 6, 7, 8])

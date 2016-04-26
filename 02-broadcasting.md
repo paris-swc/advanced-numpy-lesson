@@ -14,9 +14,9 @@ minutes: 30
 > * Understands the rules of broadcasting and can predict the shape of broadcasted arrays.
 > * Knows how to control broadcasting using `np.newaxis` object.
 
-It’s possible to do operations on arrays of different sizes if Numpy can
-transform these arrays so that they all have the same size: this conversion is
-called broadcasting.
+It’s possible to do operations on arrays of different sizes. In some case NumPy can
+transform these arrays automatically so that they all have the same size: this conversion is
+called **broadcasting**.
 
 ![numpy broadcasting in 2D](fig/numpy_broadcasting.png "numpy broadcasting in 2D")
 
@@ -39,6 +39,11 @@ We can tile them in 2D using `np.tile` function:
 array([[0, 1, 2],
        [0, 1, 2],
        [0, 1, 2]])
+```
+
+We do the same with the second array, but we need also to transpose (exchange columns with rows) the resulting array:
+
+```
 >>> a2 = np.tile(a, (3, 1))
 >>> a2 = a2.T
 >>> a2
@@ -47,7 +52,7 @@ array([[ 0,  0,  0],
        [20, 20, 20]])
 ```
 
-Then you can add them element-wise:
+Note that the `np.tile` function creates new arrays and copies the data. Then you can add the arrays element-wise:
 
 ```
 >>> a2 + b2
@@ -56,7 +61,7 @@ array([[ 0,  1,  2],
        [20, 21, 22]])
 ```
 
-Alternatively, you could directly add a 1D array to 2D array. NumPy will automatically "tile" the 1D array along the missing direction, however no copy is involved:
+Alternatively, you could directly add a 1D array to 2D array. NumPy will automatically "tile" the 1D array along the missing direction,:
 
 ```
 >>> a2 + b
@@ -65,7 +70,8 @@ array([[ 0,  1,  2],
        [20, 21, 22]])
 ```
 
-To obtain a column vector from a 1D array we need to convert it to 2D array by a special `np.newaxis` object:
+However, in this case no copy of `b` array is involved. NumPy will instead look up the same data twice -- we will cover the mechanism behind it at the end of the lesson. To obtain a column vector from a 1D array we need to convert it to 2D array by a special `np.newaxis` object:
+
 
 ```
 >>> a.shape
@@ -88,7 +94,7 @@ array([[ 0,  1,  2],
        [20, 21, 22]])
 ```
 
-This is the same as:
+This is the same as adding a column and  row vector:
 
 ``` {.python}
 >>> b_row = b[np.newaxis, :]
@@ -104,7 +110,11 @@ array([[ 0,  1,  2],
 
 > ## Normalising data {.challenge}
 > 
-> Calculate Z-score for each row of a 10x100 matrix.
+> Calculate Z-score for each row of a `a`:
+>
+> ```
+> a = np.random.rand(10, 100) 
+> ```
 
 
 Broadcasting seems a bit magical, but it is actually quite natural to use it when we want to solve a problem whose output data is an array with more dimensions than input data. There a simple rule that allow to determine the validity of broadcasting and the shape of broadcasted arrays:
@@ -135,17 +145,17 @@ Result (4d array):  8 x 7 x 6 x 5
 > 
 > a) `X + Y`
 > 
-> b) `X[None, :] + Y`
+> b) `X[np.newaxis, :] + Y`
 > 
-> c) `X[np.newaxis, :] + Y`
+> c) `X + Y[:, np.newaxis]`
 > 
-> d) `X[None, :] + Y[:, None]`
+> d) `X[:, np.newaxis] + Y`
 > 
-> e) `X[:, np.newaxis] + Y`
+> e) `X + Y[np.newaxis, :]`
+>
+> f) `X[:, np.newaxis, :] + Y`
 > 
-> f) `X + Y[np.newaxis, :]`
-> 
-> What will be the shapes of the final broadcasted arrays? Try to guess and then check using `np.broadcast_arrays`.
+> What will be the shapes of the final broadcasted arrays? Try to guess and then check.
 
 > ## Three-dimensional broadcasting {.challenge}
 >
@@ -219,13 +229,13 @@ array([[ 0.        ,  1.        ,  2.        ,  3.        ,  4.        ],
 > where $\Delta\phi=\phi_1-\phi_2$ and $\Delta\lambda=\lambda_1-\lambda_2$ are the differences between the latitudes and longitude of two cities in radians. (*Hint*: To convert degrees to radians multiply them by $\pi/180$).
 > ```
 > coords = np.array([
->                   [ 23.71666667,  37.96666667],
->                   [ 13.38333333,  52.51666667],
->                   [ -0.1275    ,  51.50722222],
->                   [ -3.71666667,  40.38333333],
->                   [  2.3508    ,  48.8567    ],
->                   [ 12.5       ,  41.9       ]])
-> names = np.array(['Athens', 'Berlin', 'London', 'Madrid', 'Paris', 'Rome'])
+>                   [ 23.71666667,  37.96666667], # Athens
+>                   [ 13.38333333,  52.51666667], # Berlin
+>                   [ -0.1275    ,  51.50722222], # London
+>                   [ -3.71666667,  40.38333333], # Madrid
+>                   [  2.3508    ,  48.8567    ], # Paris
+>                   [ 12.5       ,  41.9       ]  # Rome
+                    ]) 
 > ```
 > When you are done you can compare the results with a more [precise formula](https://en.wikipedia.org/wiki/Geographical_distance#Spherical_Earth_projected_to_a_plane):
 >

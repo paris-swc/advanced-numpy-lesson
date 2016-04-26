@@ -8,8 +8,8 @@ minutes: 5
 >
 > * Learner will explain the difference between element-wise and matrix product of two arrays.
 > * Learner will apply reduction functions (mean, min, max) along a given axis.
-> * Learner find a specialised numerical algorithm from the ones available in numpy.
-> * Learner will be able to use from several sorting routines.
+> * Learner will be able to find a specialised numerical algorithm from the ones available in numpy.
+> * Learner will be able to sort array along given axis.
 
 Multiplication of two arrays is elementwise. For example, to calculate a square of each element we may use:
 
@@ -51,7 +51,7 @@ array([[0, 1, 2],
 36
 ```
 
-If we want to sum only columns or rows, we need to pass the index of the axis over which we want to sum:
+If you want to sum only columns or rows, you need to pass the index of the axis over which you want to sum:
 
 ```
 >>> np.sum(b, 0)
@@ -71,7 +71,7 @@ array([0, 1, 2])
 array([0, 3, 6])
 ```
 
-We can also find the index of the minimum element in each axis:
+You can also find the index of the minimum element in each axis:
 
 ```
 >>> np.argmin(b, 0)
@@ -80,7 +80,7 @@ array([0, 0, 0])
 
 ### Sorting
 
-NumPy also implement various sorting algorithms. To sort elements of an array we can simply use `np.sort` functions:
+NumPy also implement various sorting algorithms. To sort elements of an array you can use `np.sort` functions:
 
 ```
 >>> a = np.random.rand(4)
@@ -90,7 +90,7 @@ array([ 0.9490829 ,  0.07528673,  0.17463988,  0.95964801])
 array([ 0.07528673,  0.17463988,  0.9490829 ,  0.95964801])
 ```
 
-By default, `np.sort` flattens the array (make it 1-D) before sorting, but similarly to the reduction functions we can also pass the axis index to sort along: 
+Similarly to the reduction functions, you can also pass the axis index to sort along: 
 
 ```
 >>> b = a.reshape(2, 2)
@@ -105,7 +105,7 @@ array([[ 0.07528673,  0.9490829 ],
        [ 0.17463988,  0.95964801]])
 ```
 
-We can also find the order in which elements need to be placed to have them sorted:
+`np.argsort` returns the order of elements in a sorted array:
 
 ```
 >>> np.argsort(a)

@@ -48,8 +48,8 @@
 <pre><code>&gt;&gt;&gt; a = np.arange(10)
 &gt;&gt;&gt; a
 array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-&gt;&gt;&gt; a[0], a[2], a[-1]
-(0, 2, 9)</code></pre>
+&gt;&gt;&gt; np.array([a[0], a[2], a[-1]])
+array([0, 2, 9])</code></pre>
 <p>For two- or more dimensional arrays multiple indices should be specified:</p>
 <pre><code>&gt;&gt;&gt; b = np.arange(6).reshape(2,3)
 &gt;&gt;&gt; b
@@ -57,7 +57,7 @@ array([[0, 1, 2],
        [3, 4, 5]])
 &gt;&gt;&gt; b[1, 2]
 5</code></pre>
-<p>Slicing allows to extract sub-arrays of multiple elements from the array. It’s defined by three integers separated by a colon, i.e. <code>start:end:increment</code>. Any of the values can be skipped in which case they are replaced by defaults (0 for start, -1 for end and 1 for increment):</p>
+<p>Slicing allows to extract sub-arrays of multiple elements from an array. It’s defined by three integers separated by a colon, i.e. <code>start:end:increment</code>. Any of the integers can be skipped in which case they are replaced by defaults (0 for <code>start</code>, end of array for <code>end</code> and 1 for <code>increment</code>):</p>
 <pre><code>&gt;&gt;&gt; c = np.arange(9)
 &gt;&gt;&gt; c[1:3]
 array([1, 2])
@@ -92,7 +92,7 @@ array([   0, 1000,    2, 1000,    4, 1000,    6, 1000,    8])</code></pre>
 </div>
 </section>
 <h3 id="boolean-mask">Boolean mask</h3>
-<p>Sometimes we may want to select array elements based on some criterion. For this case boolean mask is very useful. The mask is an array of the same length as the indexed array containg only <code>False</code> or <code>True</code> values:</p>
+<p>Sometimes we may want to select array elements based on their values. For this case boolean mask is very useful. The mask is an array of the same length as the indexed array containg only <code>False</code> or <code>True</code> values:</p>
 <pre><code>&gt;&gt;&gt; a = np.arange(4)
 &gt;&gt;&gt; a
 array([0, 1, 2, 3])
@@ -149,7 +149,7 @@ array([20, 30, 20, 40, 20])</code></pre>
 <pre><code>&gt;&gt;&gt; a[[9, 7]] = -100
 &gt;&gt;&gt; a
 array([   0,   10,   20,   30,   40,   50,   60, -100,   80, -100])</code></pre>
-<p>When a new array is created by indexing with an array of integers, the new array has the same shape than the array of integers. Note that the array returns a copy and not a view.</p>
+<p>When a new array is created by indexing with an array of integers, the new array has the same shape than the array of integers. Note that fancing indexing returns a copy and not a view.</p>
 <pre><code>&gt;&gt;&gt; a = np.arange(10)
 &gt;&gt;&gt; idx = np.array([[3, 4], [9, 7]])
 &gt;&gt;&gt; idx.shape
@@ -172,9 +172,10 @@ array([0, 1, 2, 4, 6])</code></pre>
 <p>Let <code>x = np.array([1, 5, 10])</code>.</p>
 <p>Which of the following will show [1, 10]:</p>
 <ol style="list-style-type: lower-alpha">
-<li><p><code>print(x[::2])</code></p></li>
-<li><p><code>print(x[[0, 2]])</code></p></li>
-<li><p><code>x[1, 3]</code></p></li>
+<li><p><code>x[::2]</code></p></li>
+<li><p><code>x[[1, 3]]</code></p></li>
+<li><p><code>x[[0, 2]]</code></p></li>
+<li><p><code>x[0, 2]</code></p></li>
 <li><p><code>x[[1, -1]]</code></p></li>
 <li><p><code>x[[False, True, False]]</code></p></li>
 </ol>
@@ -186,7 +187,7 @@ array([0, 1, 2, 4, 6])</code></pre>
 <h2 id="random-elements"><span class="glyphicon glyphicon-pencil"></span>Random elements</h2>
 </div>
 <div class="panel-body">
-<p>Using fancy indexing Select randomly with repetition 10 elements from an array of 100 elements.</p>
+<p>Using fancy indexing select randomly with repetition 10 elements from a random array of 100 elements (<em>Hint</em>: you can use <code>np.random.randint(max_int, size=n)</code> to generate <code>n</code> random numbers from 0 to <code>max_int</code>)</p>
 </div>
 </section>
 <section class="challenge panel panel-success">
@@ -194,7 +195,7 @@ array([0, 1, 2, 4, 6])</code></pre>
 <h2 id="drawing-random-integers-without-repetition"><span class="glyphicon glyphicon-pencil"></span>Drawing random integers without repetition</h2>
 </div>
 <div class="panel-body">
-<p>Generate a random sequence of 10 integers from 1 to 100 without repetition (you may want to use <code>np.random.rand</code> and <code>np.argsort</code>).</p>
+<p>Generate a random sequence of 10 integers from 1 to 100 without repetition (<em>Hint</em>: you may want to use <code>np.random.rand</code> and <code>np.argsort</code>).</p>
 </div>
 </section>
 <section class="challenge panel panel-success">
@@ -202,14 +203,14 @@ array([0, 1, 2, 4, 6])</code></pre>
 <h2 id="broadcasting-indices"><span class="glyphicon glyphicon-pencil"></span>Broadcasting indices</h2>
 </div>
 <div class="panel-body">
-<p>Predict and verify the shape of the following operation.</p>
+<p>Predict and verify the shape of <code>y</code>:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> np.empty((<span class="dv">10</span>, <span class="dv">8</span>, <span class="dv">6</span>))
 
 idx0 <span class="op">=</span> np.zeros((<span class="dv">3</span>, <span class="dv">8</span>)).astype(<span class="bu">int</span>)
 idx1 <span class="op">=</span> np.zeros((<span class="dv">3</span>, <span class="dv">1</span>)).astype(<span class="bu">int</span>)
 idx2 <span class="op">=</span> np.zeros((<span class="dv">1</span>, <span class="dv">1</span>)).astype(<span class="bu">int</span>)
 
-x[idx0, idx1, idx2]</code></pre></div>
+y <span class="op">=</span> x[idx0, idx1, idx2]</code></pre></div>
 </div>
 </section>
         </div>

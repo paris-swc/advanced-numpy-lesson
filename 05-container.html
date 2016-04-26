@@ -34,7 +34,6 @@
 </div>
 <div class="panel-body">
 <p>After the lesson learner:</p>
-<p>Learning objectives:</p>
 <ul>
 <li>Can list some of the object types which can be contained in an array.</li>
 <li>Understands the concept of <code>dtype</code> and can select <code>dtype</code> best for the data at hand.</li>
@@ -46,7 +45,7 @@
 </div>
 </section>
 <h3 id="data-type">Data type</h3>
-<p>In contrast to built-in Python containers (like lists) the contents of NumPy arrays are statically <strong>typed</strong>, i.e. they can store elements only in specific format. To see the type of array contents you can use the <code>dtype</code> attribute. Let’s look at two examples:</p>
+<p>In contrast to built-in Python containers (like lists) NumPy arrays can store elements of pre-determined type only. To see the type of array contents you can use the <code>dtype</code> attribute. Let’s look at two examples:</p>
 <pre><code>&gt;&gt;&gt; a = np.array([1, 2, 3])
 &gt;&gt;&gt; a.dtype
 dtype(&#39;int64&#39;)
@@ -54,11 +53,11 @@ dtype(&#39;int64&#39;)
 &gt;&gt;&gt; b = np.array([1., 2., 3.])
 &gt;&gt;&gt; b.dtype
 dtype(&#39;float64&#39;)</code></pre>
-<p>In the first case the numbers are 64-bit (8-byte) integers and in the second 64-bit floating point (real) numbers. Note that NumPy auto-detects the data-type from the input. Different data-types allow us to store data more compactly in memory, but most of the time we simply work with floating point numbers.</p>
+<p>In the first case the numbers are 64-bit (8-byte) integers and in the second 64-bit floating point (real) numbers. Note that NumPy auto-detects the data-type from the input. Specialised data types allow us to store data more compactly in memory, but most of the time we simply work with floating point numbers.</p>
 <p>Note that all of the elements of an array must be of the same type. If we construct an array with different elements it will be <strong>cast</strong> to the “most general” type that can represent all elements. For example, array constructed from real numbers and integers will have a floating point data type:</p>
 <pre><code>&gt;&gt;&gt; a = np.array([1., 2])
 dtype(&#39;float64&#39;)</code></pre>
-<p>In cases it is impossible, NumPy will use an <code>object</code> type (also represented by capital <code>'O'</code>) which can represent any Python object – even a function:</p>
+<p>In case it is impossible, NumPy will use an <code>object</code> type (also represented by capital <code>'O'</code>) which can represent any Python object – even a function:</p>
 <pre><code>&gt;&gt;&gt; def f(): pass
 &gt;&gt;&gt; a = np.array([f, f])
 &gt;&gt;&gt; a.dtype
@@ -72,7 +71,7 @@ array([[1], [2, 3]], dtype=object)</code></pre>
 <h2 id="integer-or-real-number"><span class="glyphicon glyphicon-pencil"></span>Integer or real number?</h2>
 </div>
 <div class="panel-body">
-<p>Construct the array <code>x = np.array([0, 1, 2, 3], dtype=np.uint8)</code> (here, <code>uint8</code> represents a single byte in memory, an unsigned integer between 0 and 255). Can you explain the results obtained by x + 1 and x / 2? Also try <code>x.astype(float) + 1</code> and <code>x.astype(float) / 2</code>.</p>
+<p>Construct the array <code>x = np.array([0, 1, 2, 255], dtype=np.uint8)</code> (here, <code>uint8</code> represents a single byte in memory, an unsigned integer between 0 and 255). Can you explain the results obtained by x + 1 and x / 2? Also try <code>x.astype(float) + 1</code> and <code>x.astype(float) / 2</code>.</p>
 </div>
 </section>
 <section class="challenge panel panel-success">
@@ -148,7 +147,7 @@ array([[  0,   1, 100,   3],
 <h2 id="fastest-changing-index"><span class="glyphicon glyphicon-pencil"></span>Fastest changing index</h2>
 </div>
 <div class="panel-body">
-<p>Compare the time of summing over rows and columns of an array <code>A = np.random.rand(10, 100000)</code>. How would you explain the differences?</p>
+<p>Compare the time of summing over rows and columns of an array <code>A = np.random.rand(10, 100000)</code>. How would you explain the differences? (<em>Hint</em>: To measure evaluation time you can use <code>%timeit</code> of ipython)</p>
 </div>
 </section>
 <section class="challenge panel panel-success">

@@ -9,10 +9,10 @@ minutes: 45
 >
 > After the lesson the learner should:
 >
-> * Be able to combine axis-based reductions, broadcasting and indexing to implement simple clustering algorithms.
+> * Be able to combine axis-based reductions, broadcasting and indexing to implement a simple clustering algorithm.
 > * Understand what are the advantages of vectorisation and when to use or not use it.
 
-K-means is a simple algorithm to cluster data that is to identify groups of similar objects based only on their properties. The algorithm is best-illustrated by the following graph.
+K-means is a simple algorithm to cluster data -- that is to identify groups of similar objects based only on their properties. The algorithm is best-illustrated by the following graph.
 
 ![](fig/kmeans/kmeans_illustration.png)
 

@@ -8,8 +8,6 @@ minutes: 45
 >
 > After the lesson learner:
 >
-> Learning objectives:
->
 > * Can list some of the object types which can be contained in an array.
 > * Understands the concept of `dtype` and can select `dtype` best for the data at hand.
 > * Knows what is an object array and when it is created.
@@ -19,7 +17,7 @@ minutes: 45
 
 ### Data type 
 
-In contrast to built-in Python containers (like lists) the contents of NumPy arrays are statically **typed**, i.e. they can store elements only in specific format. To see the type of array contents you can use the `dtype` attribute. Let's look at two examples:
+In contrast to built-in Python containers (like lists)  NumPy arrays can store elements of pre-determined type only. To see the type of array contents you can use the `dtype` attribute. Let's look at two examples:
 
 ```
 >>> a = np.array([1, 2, 3])
@@ -31,7 +29,7 @@ dtype('int64')
 dtype('float64')
 ```
 
-In the first case the numbers are 64-bit (8-byte) integers and in the second 64-bit floating point (real)  numbers. Note that NumPy auto-detects the data-type from the input. Different data-types allow us to store data more compactly in memory, but most of the time we simply work with floating point numbers.
+In the first case the numbers are 64-bit (8-byte) integers and in the second 64-bit floating point (real)  numbers. Note that NumPy auto-detects the data-type from the input. Specialised data types allow us to store data more compactly in memory, but most of the time we simply work with floating point numbers.
 
 Note that all of the elements of an array must be of the same type. If we construct an array with different elements it will be **cast** to the "most general" type that can represent all elements. For example, array constructed from real numbers and integers will have a floating point data type:
 
@@ -40,7 +38,7 @@ Note that all of the elements of an array must be of the same type. If we constr
 dtype('float64')
 ```
 
-In cases it is impossible, NumPy will use an `object` type (also represented by capital `'O'`) which can represent any Python object -- even a function:
+In case it is impossible, NumPy will use an `object` type (also represented by capital `'O'`) which can represent any Python object -- even a function:
 
 ```
 >>> def f(): pass
@@ -61,7 +59,7 @@ array([[1], [2, 3]], dtype=object)
 
 > ## Integer or real number? {.challenge}
 >
-> Construct the array `x = np.array([0, 1, 2, 3], dtype=np.uint8)` (here, `uint8`
+> Construct the array `x = np.array([0, 1, 2, 255], dtype=np.uint8)` (here, `uint8`
 > represents a single byte in memory, an unsigned integer between 0 and 255). Can
 > you explain the results obtained by x + 1 and x / 2? Also try `x.astype(float) + 1` and `x.astype(float) / 2`.
 
@@ -148,7 +146,7 @@ explain the new strides?
 
 > ## Fastest changing index {.challenge}
 >
->  Compare the time of summing over rows and columns of an array `A = np.random.rand(10, 100000)`. How would you explain the differences?
+>  Compare the time of summing over rows and columns of an array `A = np.random.rand(10, 100000)`. How would you explain the differences? (*Hint*: To measure evaluation time you can use `%timeit` of ipython)
 
 > ## Sliding window {.challenge}
 >

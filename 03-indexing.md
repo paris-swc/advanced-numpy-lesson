@@ -22,8 +22,8 @@ Individual items of an array can be accessed by the integer index of the element
 >>> a = np.arange(10)
 >>> a
 array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
->>> a[0], a[2], a[-1]
-(0, 2, 9)
+>>> np.array([a[0], a[2], a[-1]])
+array([0, 2, 9])
 ```
 
 For two- or more dimensional arrays multiple indices should be specified:
@@ -37,7 +37,7 @@ array([[0, 1, 2],
 5
 ```
 
-Slicing allows to extract sub-arrays of multiple elements from the array. It's defined by three integers separated by a colon, i.e. `start:end:increment`. Any of the values can be skipped in which case they are replaced by defaults (0 for start, -1 for end and 1 for increment):
+Slicing allows to extract sub-arrays of multiple elements from an array. It's defined by three integers separated by a colon, i.e. `start:end:increment`. Any of the integers can be skipped in which case they are replaced by defaults (0 for `start`, end of array for `end` and 1 for `increment`):
 
 ```
 >>> c = np.arange(9)
@@ -74,7 +74,7 @@ array([   0, 1000,    2, 1000,    4, 1000,    6, 1000,    8])
 
 ### Boolean mask
 
-Sometimes we may want to select array elements based on some criterion. For this case boolean mask is very useful. The mask is an array of the same length as the indexed array containg only `False` or `True` values:
+Sometimes we may want to select array elements based on their values. For this case boolean mask is very useful. The mask is an array of the same length as the indexed array containg only `False` or `True` values:
 
 ```
 >>> a = np.arange(4)
@@ -150,7 +150,7 @@ New values can be also assigned with this kind of indexing:
 array([   0,   10,   20,   30,   40,   50,   60, -100,   80, -100])
 ```
 
-When a new array is created by indexing with an array of integers, the new array has the same shape than the array of integers. Note that the array returns a copy and not a view.
+When a new array is created by indexing with an array of integers, the new array has the same shape than the array of integers. Note that fancing indexing returns a copy and not a view.
 
 ```
 >>> a = np.arange(10)
@@ -179,30 +179,32 @@ array([0, 1, 2, 4, 6])
 > 
 > Which of the following will show [1, 10]:
 > 
-> a) `print(x[::2])`
-> 
-> b) `print(x[[0, 2]])`
-> 
-> c) `x[1, 3]`
-> 
-> d) `x[[1, -1]]`
+> a) `x[::2]`
 >
-> e) `x[[False, True, False]]`
+> b) `x[[1, 3]]`
+> 
+> c) `x[[0, 2]]`
+> 
+> d) `x[0, 2]`
+> 
+> e) `x[[1, -1]]`
+>
+> f) `x[[False, True, False]]`
 >
 > For each statement predict whether it returns a copy or a view.
 
 
 > ## Random elements {.challenge}
 >
-> Using fancy indexing Select randomly with repetition 10 elements from an array of 100 elements.
+> Using fancy indexing select randomly with repetition 10 elements from a random array of 100 elements (*Hint*: you can use `np.random.randint(max_int, size=n)` to generate `n` random numbers from 0 to `max_int`)
 
 > ## Drawing random integers without repetition {.challenge}
 >
-> Generate a random sequence of 10 integers from 1 to 100 without repetition (you may want to use `np.random.rand` and `np.argsort`).
+> Generate a random sequence of 10 integers from 1 to 100 without repetition (*Hint*: you may want to use `np.random.rand` and `np.argsort`).
 
 > ## Broadcasting indices {.challenge}
 >
-> Predict and verify the shape of the following operation.
+> Predict and verify the shape of `y`:
 > 
 > ```python
 > x = np.empty((10, 8, 6))
@@ -211,6 +213,6 @@ array([0, 1, 2, 4, 6])
 > idx1 = np.zeros((3, 1)).astype(int)
 > idx2 = np.zeros((1, 1)).astype(int)
 > 
-> x[idx0, idx1, idx2]
+> y = x[idx0, idx1, idx2]
 > ```
 
