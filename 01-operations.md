@@ -122,7 +122,7 @@ NumPy also provides extra modules implementing basic numerical methods:
 
 > ## Finding closest element {.challenge}
 >
-> Generate a 10 x 3 array of random numbers. From each row, pick the number closest to 0.75. Make use of `np.abs` and `np.argmax` to find the column j which contains the closest element in each row.
+> Generate a 10 x 3 array of random numbers (using `np.random.rand`). From each row, find the column index of the element closest to 0.75. Make use of np.abs and np.argmin. The result should be a one-dimensional array of integers from 0 to 2.
 
 > ## Solving linear equations {.challenge}
 >
