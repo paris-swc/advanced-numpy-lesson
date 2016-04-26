@@ -126,6 +126,6 @@ NumPy also provides extra modules implementing basic numerical methods:
 
 > ## Solving linear equations {.challenge}
 >
-> Solve the following system of linear equations using numpy. Test the solution.
-> $$2x_1 + 3x_2 = 3$$
-> $$5x_1 - x_2 = 6$$
+> Solve the following system of linear equations using `np.linalg.solve`. Test the solution.
+> $$2x + 3y = 3$$
+> $$5x - y = 6$$
