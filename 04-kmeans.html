@@ -45,33 +45,38 @@
 <img src="fig/kmeans/kmeans_illustration.png" />
 
 </div>
-<h3 id="generating-data">Generating data</h3>
-<p>We first need to generate some data. We will make an artificial data set consisiting of three clusters at different centers with gaussian noise around the centers. For simplicity, each of the cluster contains 100 points.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy <span class="im">as</span> np
-<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
-
-centers <span class="op">=</span> np.array([[  <span class="dv">2</span>, <span class="dv">3</span>], 
-                    [  <span class="dv">3</span>, <span class="dv">2</span>],
-                    [<span class="fl">2.8</span>, <span class="dv">3</span>]])
-noise <span class="op">=</span> <span class="fl">0.1</span> <span class="op">*</span> np.random.randn(<span class="dv">100</span>, <span class="dv">3</span>, <span class="dv">2</span>)</code></pre></div>
-<p>We will take advantage of <strong>broadcasting</strong> to move the clusters to their centers:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">clusters <span class="op">=</span> noise <span class="op">+</span> centers</code></pre></div>
-<p>The K-means algorithm should be naive about the identity of the clusters. So we merge all clusters together using <code>reshape</code> and shuffle the points:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">data <span class="op">=</span> clusters.reshape(<span class="dv">100</span> <span class="op">*</span> <span class="dv">3</span>, <span class="dv">2</span>)
-np.random.shuffle(data)
-plt.scatter(data[:, <span class="dv">0</span>], data[:, <span class="dv">1</span>])</code></pre></div>
+<h3 id="loading-data">Loading data</h3>
+<p>We first need to load sample. If you haven’t done some before you can download it from <a href="data/kmeans_data.csv">here</a>.</p>
+<pre><code>&gt;&gt;&gt; data = np.loadtxt(&#39;kmeans_data.csv&#39;)
+&gt;&gt;&gt; data.shape
+(30, 2)</code></pre>
+<p>To visualise the data we can use the <code>scatter</code> function from matplotlib package:</p>
+<pre><code>&gt;&gt;&gt; import matplotlib.pyplot as plt
+&gt;&gt;&gt; plt.scatter(data[:, 0], data[:, 1], s=40)
+&gt;&gt;&gt; plt.show()</code></pre>
 <div class="figure">
 <img src="fig/kmeans/generating_data.png" alt="Sample data with 3 clusters" />
 <p class="caption">Sample data with 3 clusters</p>
 </div>
+<p>Since, we are going to build up the example gradually. Let us put the commands in a script:</p>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+# load data
+data = np.loadtxt(&#39;kmeans_data.csv&#39;)
+
+# plot
+plt.scatter(data[:, 0], data[:, 1], s=40)</code></pre>
 <h3 id="initialisation">Initialisation</h3>
 <p>In the first step of the algorithm we need to initialise the centers of the clusters. We will initialise them randomly but consistently with the mean and standard deviation of the data:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">K <span class="op">=</span> <span class="dv">3</span>
-k_centers <span class="op">=</span> np.random.randn(K, <span class="dv">2</span>) <span class="op">*</span> np.std(data, <span class="dv">0</span>) <span class="op">+</span> np.mean(data, <span class="dv">0</span>)</code></pre></div>
-<p>Lets now plot the data and the random cluster centers on the same figure:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">plt.scatter(data[:, <span class="dv">0</span>], data[:, <span class="dv">1</span>])
-cluster_colors <span class="op">=</span> np.arange(<span class="dv">3</span>)
-plt.scatter(k_centers[:, <span class="dv">0</span>], k_centers[:, <span class="dv">1</span>], c<span class="op">=</span>cluster_colors, s<span class="op">=</span><span class="dv">50</span>)</code></pre></div>
+centroids <span class="op">=</span> np.random.randn(K, <span class="dv">2</span>)</code></pre></div>
+<p>To center the cluster centroids on the data it’s better to normalise to the mean and standard deviation of the data:</p>
+<pre><code>centroids = centroids * np.std(data, 0)
+centroids = centroids + np.mean(data, 0)</code></pre>
+<p>Let’s now plot the data and the random cluster centers on the same figure:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">plt.scatter(data[:, <span class="dv">0</span>], data[:, <span class="dv">1</span>], s<span class="op">=</span><span class="dv">40</span>)
+plt.scatter(centroids[:, <span class="dv">0</span>], centroids[:, <span class="dv">1</span>], c<span class="op">=</span>np.arange(<span class="dv">3</span>), s<span class="op">=</span><span class="dv">100</span>)</code></pre></div>
 <div class="figure">
 <img src="fig/kmeans/initialisation.png" alt="Randomly initalised cluster centers (color big dots)" />
 <p class="caption">Randomly initalised cluster centers (color big dots)</p>
@@ -86,31 +91,17 @@ plt.scatter(k_centers[:, <span class="dv">0</span>], k_centers[:, <span class="d
 </div>
 </section>
 <p>We now need to assign each point to the closest cluster center. First, we will calculate the Euclidean distance of each point to each of the centers. For this we can use the <strong>broadcasting</strong>:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">deltas <span class="op">=</span> data[np.newaxis, :, :] <span class="op">-</span> k_centers[:, np.newaxis, :]
-center_distance <span class="op">=</span> np.sqrt(np.<span class="bu">sum</span>(deltas<span class="op">**</span><span class="dv">2</span>, <span class="dv">2</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">deltas <span class="op">=</span> data[:, np.newaxis, :] <span class="op">-</span> centroids
+distances <span class="op">=</span> np.sqrt(np.<span class="bu">sum</span>((deltas) <span class="op">**</span> <span class="dv">2</span>, <span class="dv">2</span>))</code></pre></div>
 <p>For each data point we find the center with minimum distance. We can use the <code>argmin</code> method with the <strong>axis argument</strong>:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">closest_center <span class="op">=</span> center_distance.argmin(<span class="dv">0</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">plt.scatter(data[:, <span class="dv">0</span>], data[:, <span class="dv">1</span>], c<span class="op">=</span>closest_center)
-cluster_colors <span class="op">=</span> np.arange(<span class="dv">3</span>)
-plt.scatter(k_centers[:, <span class="dv">0</span>], k_centers[:, <span class="dv">1</span>], c<span class="op">=</span>cluster_colors, s<span class="op">=</span><span class="dv">50</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">closest <span class="op">=</span> distances.argmin(<span class="dv">1</span>)</code></pre></div>
+<p>Now we plot the centroids and data points with the color-code reflecting cluster membership:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">plt.scatter(data[:, <span class="dv">0</span>], data[:, <span class="dv">1</span>], s<span class="op">=</span><span class="dv">40</span>, c<span class="op">=</span>closest)
+plt.scatter(centroids[:, <span class="dv">0</span>], centroids[:, <span class="dv">1</span>], c<span class="op">=</span>np.arange(<span class="dv">3</span>), s<span class="op">=</span><span class="dv">100</span>)</code></pre></div>
 <div class="figure">
 <img src="fig/kmeans/assignment.png" alt="Data points assigned to closest cluster center" />
 <p class="caption">Data points assigned to closest cluster center</p>
 </div>
-<p>We are going to re-use this code, so lets define two functions — one for cluster assignment and another for plotting:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> assign(data, k_centers):
-    <span class="co">&quot;&quot;&quot;Assign each data point to closest center.</span>
-<span class="co">    Returns an array of cluster indices&quot;&quot;&quot;</span>
-    deltas <span class="op">=</span> data[np.newaxis, :, :] <span class="op">-</span> k_centers[:, np.newaxis, :]
-    center_distance <span class="op">=</span> np.sqrt(np.<span class="bu">sum</span>((deltas)<span class="op">**</span><span class="dv">2</span>, <span class="dv">2</span>))
-    closest_center <span class="op">=</span> center_distance.argmin(<span class="dv">0</span>)
-    <span class="cf">return</span> closest_center
-
-<span class="kw">def</span> show_clusters(data, k_centers, closest_center):
-    <span class="co">&quot;&quot;&quot;Plot clusters and their centers&quot;&quot;&quot;</span>
-    plt.scatter(data[:, <span class="dv">0</span>], data[:, <span class="dv">1</span>], c<span class="op">=</span>closest_center)
-    cluster_colors <span class="op">=</span> np.arange(<span class="dv">3</span>)
-    plt.scatter(k_centers[:, <span class="dv">0</span>], k_centers[:, <span class="dv">1</span>], c<span class="op">=</span>cluster_colors, s<span class="op">=</span><span class="dv">50</span>)</code></pre></div>
 <h3 id="calculate-new-cluster-centers">Calculate new cluster centers</h3>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
@@ -124,27 +115,22 @@ plt.scatter(k_centers[:, <span class="dv">0</span>], k_centers[:, <span class="d
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">data[closest_center<span class="op">==</span><span class="dv">0</span>, :].mean(<span class="dv">0</span>)</code></pre></div>
 <pre><code>array([ 2.90695091,  2.52099101])</code></pre>
 <p>To repeat it for all clusters we can use a for loop or list comprehension. Since the number of clusters is usually much smaller than the number of data points, this for loop won’t affect the performance of our algorithm:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">k_centers <span class="op">=</span> np.array([data[closest_center<span class="op">==</span>c, :].mean(<span class="dv">0</span>) <span class="cf">for</span> c <span class="op">in</span> <span class="bu">range</span>(<span class="dv">3</span>)])</code></pre></div>
-<p>Lets check the positions of new centers and assignment of points to clusters:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">closest_center <span class="op">=</span> assign(data, k_centers)
-show_clusters(data, k_centers, closest_center)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">centroids <span class="op">=</span> np.array([data[closest <span class="op">==</span> i, :].mean(<span class="dv">0</span>) <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">3</span>)])</code></pre></div>
+<p>Lets check the positions of new centers and assignment of points to clusters.</p>
 <div class="figure">
 <img src="fig/kmeans/update_centers.png" alt="Re-calculated cluster centers" />
 <p class="caption">Re-calculated cluster centers</p>
 </div>
-<p>Again, we will define a function for later re-use:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> move_centers(data, closest_center):
-    <span class="co">&quot;&quot;&quot;Update cluster centers based on new cluster membership&quot;&quot;&quot;</span>
-    k_centers <span class="op">=</span> np.array([data[closest_center<span class="op">==</span>c, :].mean(<span class="dv">0</span>) <span class="cf">for</span> c <span class="op">in</span> <span class="bu">range</span>(<span class="dv">3</span>)])
-    <span class="cf">return</span> k_centers</code></pre></div>
 <h3 id="iterations">Iterations</h3>
 <p>Now we can repeat the steps of assigning point to clusters and updating the cluster centers iteratively and watch the progress of the algorithm:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">n_iterations <span class="op">=</span> <span class="dv">3</span>
-<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n_iterations):
-    k_centers <span class="op">=</span> move_centers(data, closest_center)
-    closest_center <span class="op">=</span> assign(data, k_centers)
-    plt.figure()
-    show_clusters(data, k_centers, closest_center)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> iteration <span class="op">in</span> <span class="bu">range</span>(<span class="dv">5</span>):
+   <span class="co"># assign points to clusters</span>
+   deltas <span class="op">=</span> data[:, np.newaxis, :] <span class="op">-</span> centroids
+   distances <span class="op">=</span> np.sqrt(np.<span class="bu">sum</span>((deltas) <span class="op">**</span> <span class="dv">2</span>, <span class="dv">2</span>))
+   closest <span class="op">=</span> distances.argmin(<span class="dv">1</span>)
+
+   <span class="co"># calculate new centroids</span>
+   centroids <span class="op">=</span> np.array([data[closest <span class="op">==</span> i, :].mean(<span class="dv">0</span>) <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">3</span>)])</code></pre></div>
 <aside class="callout panel panel-info">
 <div class="panel-heading">
 <h2 id="single-cluster"><span class="glyphicon glyphicon-pushpin"></span>Single cluster?</h2>
@@ -158,50 +144,34 @@ show_clusters(data, k_centers, closest_center)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy <span class="im">as</span> np
 <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
 
-<span class="kw">def</span> assign(data, k_centers):
-    <span class="co">&quot;&quot;&quot;Assign each data point to closest center.</span>
-<span class="co">    Returns an array of cluster indices&quot;&quot;&quot;</span>
-    deltas <span class="op">=</span> data[np.newaxis, :, :] <span class="op">-</span> k_centers[:, np.newaxis, :]
-    center_distance <span class="op">=</span> np.sqrt(np.<span class="bu">sum</span>((deltas)<span class="op">**</span><span class="dv">2</span>, <span class="dv">2</span>))
-    closest_center <span class="op">=</span> center_distance.argmin(<span class="dv">0</span>)
-    <span class="cf">return</span> closest_center
+data <span class="op">=</span> np.loadtxt(<span class="st">&#39;kmeans_data.csv&#39;</span>)
 
-<span class="kw">def</span> show_clusters(data, k_centers, closest_center):
-    <span class="co">&quot;&quot;&quot;Plot clusters and their centers&quot;&quot;&quot;</span>
-    plt.scatter(data[:, <span class="dv">0</span>], data[:, <span class="dv">1</span>], c<span class="op">=</span>closest_center)
-    cluster_colors <span class="op">=</span> np.arange(<span class="dv">3</span>)
-    plt.scatter(k_centers[:, <span class="dv">0</span>], k_centers[:, <span class="dv">1</span>], c<span class="op">=</span>cluster_colors, s<span class="op">=</span><span class="dv">50</span>)
-    
-<span class="kw">def</span> move_centers(data, closest_center):
-    <span class="co">&quot;&quot;&quot;Update cluster centers based on new cluster membership&quot;&quot;&quot;</span>
-    k_centers <span class="op">=</span> np.array([data[closest_center<span class="op">==</span>c, :].mean(<span class="dv">0</span>) <span class="cf">for</span> c <span class="op">in</span> <span class="bu">range</span>(<span class="dv">3</span>)])
-    <span class="cf">return</span> k_centers
+<span class="co"># randomly initalize the centroids</span>
+K <span class="op">=</span> <span class="dv">3</span>
+centroids <span class="op">=</span> np.random.randn(K, <span class="dv">2</span>)
+centroids <span class="op">=</span> centroids <span class="op">*</span> np.std(data, <span class="dv">0</span>)
+centroids <span class="op">=</span> centroids <span class="op">+</span> np.mean(data, <span class="dv">0</span>)
 
-<span class="co"># generate data</span>
-centers <span class="op">=</span> np.array([[  <span class="dv">2</span>, <span class="dv">3</span>], 
-                    [  <span class="dv">3</span>, <span class="dv">2</span>],
-                    [<span class="fl">2.8</span>, <span class="dv">3</span>]])
-noise <span class="op">=</span> <span class="fl">0.1</span> <span class="op">*</span> np.random.randn(<span class="dv">100</span>, <span class="dv">3</span>, <span class="dv">2</span>)
-clusters <span class="op">=</span> noise <span class="op">+</span> centers
-data <span class="op">=</span> clusters.reshape(<span class="dv">100</span> <span class="op">*</span> <span class="dv">3</span>, <span class="dv">2</span>)
-np.random.shuffle(data)
+<span class="cf">for</span> iteration <span class="op">in</span> <span class="bu">range</span>(<span class="dv">5</span>):
+   <span class="co"># assign points to clusters</span>
+   deltas <span class="op">=</span> data[:, np.newaxis, :] <span class="op">-</span> centroids
+   distances <span class="op">=</span> np.sqrt(np.<span class="bu">sum</span>((deltas) <span class="op">**</span> <span class="dv">2</span>, <span class="dv">2</span>))
+   closest <span class="op">=</span> distances.argmin(<span class="dv">1</span>)
 
-<span class="co"># cluster data</span>
-K <span class="op">=</span> <span class="dv">5</span>
-n_features <span class="op">=</span> <span class="dv">2</span>
-n_iterations <span class="op">=</span> <span class="dv">5</span>
-k_centers <span class="op">=</span> np.random.randn(K, n_features) <span class="op">*</span> np.std(data, <span class="dv">0</span>) <span class="op">+</span> np.mean(data, <span class="dv">0</span>)
-closest_center <span class="op">=</span> assign(data, k_centers)
-<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n_iterations):
-    k_centers <span class="op">=</span> move_centers(data, closest_center)
-    closest_center <span class="op">=</span> assign(data, k_centers)
-show_clusters(data, k_centers, closest_center)</code></pre></div>
+   <span class="co"># calculate new centroids</span>
+   centroids <span class="op">=</span> np.array([data[closest <span class="op">==</span> i, :].mean(<span class="dv">0</span>) <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">3</span>)])
+
+<span class="co"># plot </span>
+plt.scatter(data[:, <span class="dv">0</span>], data[:, <span class="dv">1</span>], s<span class="op">=</span><span class="dv">40</span>, c<span class="op">=</span>closest)
+plt.scatter(centroids[:, <span class="dv">0</span>], centroids[:, <span class="dv">1</span>], c<span class="op">=</span>np.arange(<span class="dv">3</span>), s<span class="op">=</span><span class="dv">100</span>)
+
+plt.show()</code></pre></div>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="choice-of-k"><span class="glyphicon glyphicon-pencil"></span>Choice of K</h2>
 </div>
 <div class="panel-body">
-<p>Modify the algorithm so that it works for any K. Try using K &gt; 3. What happens then?</p>
+<p>Check whether the algorithm works for any K. Try using K &gt; 3. What happens then?</p>
 </div>
 </section>
 <section class="challenge panel panel-success">
