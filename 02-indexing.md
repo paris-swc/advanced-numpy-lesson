@@ -61,10 +61,9 @@ array([   0, 1000,    2, 1000,    4, 1000,    6, 1000,    8])
 
 > ## View or copy {.challenge}
 >
-> Create a 3x4 array of
-> random values (using `np.random.rand`), and call it ``x``.
-> Create another array as follows: ``y = x[2]``.
-> What happens when you modify ``y`` &mdash; does ``x`` also change? Now try `y = x[:2]` and modify it's first element. What happens now?
+> Create a 3x4 array of  values from 0 to 11.  Create another array as follows: ``y = x[2]``.
+> What happens when you modify ``y`` &mdash; does ``x`` also change? 
+> Now try `y = x[:2]` and modify it's first element. What happens now?
 
 > ## Checkerboard {.challenge}
 >
@@ -201,18 +200,4 @@ array([0, 1, 2, 4, 6])
 > ## Drawing random integers without repetition {.challenge}
 >
 > Generate a random sequence of 10 integers from 1 to 100 without repetition (*Hint*: you may want to use `np.random.rand` and `np.argsort`).
-
-> ## Broadcasting indices {.challenge}
->
-> Predict and verify the shape of `y`:
-> 
-> ```python
-> x = np.empty((10, 8, 6))
-> 
-> idx0 = np.zeros((3, 8)).astype(int)
-> idx1 = np.zeros((3, 1)).astype(int)
-> idx2 = np.zeros((1, 1)).astype(int)
-> 
-> y = x[idx0, idx1, idx2]
-> ```
 

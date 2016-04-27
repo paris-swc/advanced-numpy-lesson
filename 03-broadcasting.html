@@ -176,6 +176,21 @@ y <span class="op">=</span> np.random.randint(<span class="dv">10</span>, size<s
 z <span class="op">=</span> x <span class="co"># FIX THIS</span></code></pre></div>
 </div>
 </section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="broadcasting-indices"><span class="glyphicon glyphicon-pencil"></span>Broadcasting indices</h2>
+</div>
+<div class="panel-body">
+<p>Predict and verify the shape of <code>y</code>:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> np.empty((<span class="dv">10</span>, <span class="dv">8</span>, <span class="dv">6</span>))
+
+idx0 <span class="op">=</span> np.zeros((<span class="dv">3</span>, <span class="dv">8</span>)).astype(<span class="bu">int</span>)
+idx1 <span class="op">=</span> np.zeros((<span class="dv">3</span>, <span class="dv">1</span>)).astype(<span class="bu">int</span>)
+idx2 <span class="op">=</span> np.zeros((<span class="dv">1</span>, <span class="dv">1</span>)).astype(<span class="bu">int</span>)
+
+y <span class="op">=</span> x[idx0, idx1, idx2]</code></pre></div>
+</div>
+</section>
 <p>A lot of grid-based or network-based problems can also use broadcasting. For instance, if we want to compute the distance from the origin of points on a 10x10 grid, we can do</p>
 <pre><code>&gt;&gt;&gt; x = np.arange(5)
 &gt;&gt;&gt; y = np.arange(5)[:, np.newaxis]

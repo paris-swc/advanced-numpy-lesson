@@ -193,6 +193,20 @@ Result (4d array):  8 x 7 x 6 x 5
 > z = x # FIX THIS
 > ```
 
+> ## Broadcasting indices {.challenge}
+>
+> Predict and verify the shape of `y`:
+> 
+> ```python
+> x = np.empty((10, 8, 6))
+> 
+> idx0 = np.zeros((3, 8)).astype(int)
+> idx1 = np.zeros((3, 1)).astype(int)
+> idx2 = np.zeros((1, 1)).astype(int)
+> 
+> y = x[idx0, idx1, idx2]
+> ```
+
 
 A lot of grid-based or network-based problems can also use broadcasting. For instance, if we want to compute the distance from the origin of points on a 10x10 grid, we can do
 ```
@@ -268,7 +282,6 @@ array([[ 0.        ,  1.        ,  2.        ,  3.        ,  4.        ],
 > $$D=6371.009\sqrt{(\Delta\phi)^2 + (\cos(\phi_m)\Delta\lambda)^2}$$
 >
 > where $\phi_m = (\phi_1+\phi_2) / 2$ is the mean latitude.
-
 
 
 

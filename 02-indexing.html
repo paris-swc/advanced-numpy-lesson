@@ -76,7 +76,7 @@ array([   0, 1000,    2, 1000,    4, 1000,    6, 1000,    8])</code></pre>
 <h2 id="view-or-copy"><span class="glyphicon glyphicon-pencil"></span>View or copy</h2>
 </div>
 <div class="panel-body">
-<p>Create a 3x4 array of random values (using <code>np.random.rand</code>), and call it <code>x</code>. Create another array as follows: <code>y = x[2]</code>. What happens when you modify <code>y</code> — does <code>x</code> also change? Now try <code>y = x[:2]</code> and modify it’s first element. What happens now?</p>
+<p>Create a 3x4 array of values from 0 to 11. Create another array as follows: <code>y = x[2]</code>. What happens when you modify <code>y</code> — does <code>x</code> also change? Now try <code>y = x[:2]</code> and modify it’s first element. What happens now?</p>
 </div>
 </section>
 <section class="challenge panel panel-success">
@@ -196,21 +196,6 @@ array([0, 1, 2, 4, 6])</code></pre>
 </div>
 <div class="panel-body">
 <p>Generate a random sequence of 10 integers from 1 to 100 without repetition (<em>Hint</em>: you may want to use <code>np.random.rand</code> and <code>np.argsort</code>).</p>
-</div>
-</section>
-<section class="challenge panel panel-success">
-<div class="panel-heading">
-<h2 id="broadcasting-indices"><span class="glyphicon glyphicon-pencil"></span>Broadcasting indices</h2>
-</div>
-<div class="panel-body">
-<p>Predict and verify the shape of <code>y</code>:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> np.empty((<span class="dv">10</span>, <span class="dv">8</span>, <span class="dv">6</span>))
-
-idx0 <span class="op">=</span> np.zeros((<span class="dv">3</span>, <span class="dv">8</span>)).astype(<span class="bu">int</span>)
-idx1 <span class="op">=</span> np.zeros((<span class="dv">3</span>, <span class="dv">1</span>)).astype(<span class="bu">int</span>)
-idx2 <span class="op">=</span> np.zeros((<span class="dv">1</span>, <span class="dv">1</span>)).astype(<span class="bu">int</span>)
-
-y <span class="op">=</span> x[idx0, idx1, idx2]</code></pre></div>
 </div>
 </section>
         </div>
