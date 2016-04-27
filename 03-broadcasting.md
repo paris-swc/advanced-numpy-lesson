@@ -117,19 +117,37 @@ array([[ 0,  1,  2],
 ```
 
 > ## Normalising data {.challenge}
-> 
-> For each row of `a` subtract its mean:
+>
+> Given the following array:
 >
 > ```
 > a = np.random.rand(10, 100) 
 > ```
+> 
+> For each column of `a` subtract its mean. Next, do the same with rows.
 
 
 Broadcasting seems a bit magical, but it is actually quite natural to use it when we want to solve a problem whose output data is an array with more dimensions than input data. There a simple rule that allow to determine the validity of broadcasting and the shape of broadcasted arrays:
 
 >  In order to broadcast, the size of the trailing axes for both arrays in an operation must either be the same or one of them must be one. 
 
-Lets look at two examples:
+This does indeed work for the three addition from the figure
+
+```
+a:      4 x 3 
+b:      4 x 3
+result: 4 x 3
+
+a:      4 x 3
+b:          3
+result: 4 x 3
+
+a:      4 x 1
+b:          3
+result: 4 x 3
+```
+
+Lets look at two more examples:
 
 ```
 Image  (3d array): 256 x 256 x 3
