@@ -22,9 +22,8 @@ title: Advanced NumPy
 2.  [Operations on NumPy arrays](01-operations.html)
 3.  [Indexing](02-indexing.html)
 4.  [Broadcasting](03-broadcasting.html)
-5.  [Case study: K-means](04-kmeans.html)
-6.  [Array container](05-container.html)
-7.  [Summing up](06-summing-up.html)
+5.  [Array container](04-container.html)
+6.  [Case study: K-means](05-kmeans.html)
 
 ## Other Resources
 
