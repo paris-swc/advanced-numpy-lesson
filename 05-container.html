@@ -196,6 +196,11 @@ array([[  0,   1, 100,   3],
 </div>
 <div class="panel-body">
 <p>Explain how broadcasting works internally using the example below. What will be shapes and strides of <code>x</code> and <code>y</code> after broadcasting. Test it using <code>np.broadcast_arrays</code> in the following example and look at <code>strides</code> and <code>shape</code> properties of both arrays.</p>
+<pre><code>x = np.random.rand(5, 10)
+y = np.random.rand(10)
+z = x + y
+
+xb, yb = np.broadcast_arrays(x, y)</code></pre>
 </div>
 </section>
         </div>

@@ -186,3 +186,11 @@ explain the new strides?
 > ## Broadcasting revisited {.challenge}
 >
 >  Explain how broadcasting works internally using the example below. What will be shapes and strides of `x` and `y` after broadcasting. Test it using `np.broadcast_arrays` in the following example and look at `strides` and `shape` properties of both arrays.
+>
+> ```
+> x = np.random.rand(5, 10)
+> y = np.random.rand(10)
+> z = x + y
+>
+> xb, yb = np.broadcast_arrays(x, y)
+> ```
