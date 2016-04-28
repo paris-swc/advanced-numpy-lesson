@@ -132,6 +132,14 @@ plt.scatter(centroids[:, <span class="dv">0</span>], centroids[:, <span class="d
 
    <span class="co"># calculate new centroids</span>
    centroids <span class="op">=</span> np.array([data[closest <span class="op">==</span> i, :].mean(<span class="dv">0</span>) <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">3</span>)])</code></pre></div>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="stopping-criterion"><span class="glyphicon glyphicon-pencil"></span>Stopping criterion</h2>
+</div>
+<div class="panel-body">
+<p>After each iteration test whether any point changes their cluster membership. Stop the algorithm if convergence was reached i.e. clusters do not change after the re-assignment step.</p>
+</div>
+</section>
 <aside class="callout panel panel-info">
 <div class="panel-heading">
 <h2 id="single-cluster"><span class="glyphicon glyphicon-pushpin"></span>Single cluster?</h2>

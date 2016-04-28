@@ -156,6 +156,10 @@ for iteration in range(5):
    centroids = np.array([data[closest == i, :].mean(0) for i in range(3)])
 ```
 
+> ## Stopping criterion {.challenge}
+>
+> After each iteration test whether any point changes their cluster membership. Stop the algorithm if convergence was reached i.e. clusters do not change after the re-assignment step.
+
 > ## Single cluster? {.callout}
 >
 > Note that sometimes the algorithm can produce degenerate results -- all of the points will be assigned to a single cluster (or final number of clusters will be less than K). This is one of drawbacks of K-means with random initialisations. A possible solution is to repeat the algorithm with other initialisations and find the best cluster assignment, but better solutions exist.
