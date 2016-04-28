@@ -80,6 +80,8 @@ plt.scatter(centroids[:, 0], centroids[:, 1], c=np.arange(3), s=100)
 ![Randomly initalised cluster centers (color big dots)](fig/kmeans/initialisation.png)
 
 
+Now you can copy-and-paste these lines into the script. You may find the `%history` command of ipython console useful.
+
 ### Assignment
 
 > ## Find closest centers {.challenge}
@@ -113,13 +115,13 @@ plt.scatter(centroids[:, 0], centroids[:, 1], c=np.arange(3), s=100)
 
 > ## Cluster center {.challenge}
 >
-> Given the array of cluster assignments (`closest_centers` returned by `assign` function) calculate the center coordinates of the first cluster cluster (index 0). 
+> Given the array of cluster assignments `closest` calculate the center coordinates of the first cluster cluster (index 0). 
 
 To calculate new centers of the clusters, we average all points belonging to that cluster. We can use a **boolean mask**. For example, to calculate the center of a cluster 0 we will use the following instruction:
 
 
 ```python
-data[closest_center==0, :].mean(0)
+data[closest==0, :].mean(0)
 ```
 
 ```

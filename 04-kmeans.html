@@ -81,6 +81,7 @@ plt.scatter(centroids[:, <span class="dv">0</span>], centroids[:, <span class="d
 <img src="fig/kmeans/initialisation.png" alt="Randomly initalised cluster centers (color big dots)" />
 <p class="caption">Randomly initalised cluster centers (color big dots)</p>
 </div>
+<p>Now you can copy-and-paste these lines into the script. You may find the <code>%history</code> command of ipython console useful.</p>
 <h3 id="assignment">Assignment</h3>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
@@ -108,11 +109,11 @@ plt.scatter(centroids[:, <span class="dv">0</span>], centroids[:, <span class="d
 <h2 id="cluster-center"><span class="glyphicon glyphicon-pencil"></span>Cluster center</h2>
 </div>
 <div class="panel-body">
-<p>Given the array of cluster assignments (<code>closest_centers</code> returned by <code>assign</code> function) calculate the center coordinates of the first cluster cluster (index 0).</p>
+<p>Given the array of cluster assignments <code>closest</code> calculate the center coordinates of the first cluster cluster (index 0).</p>
 </div>
 </section>
 <p>To calculate new centers of the clusters, we average all points belonging to that cluster. We can use a <strong>boolean mask</strong>. For example, to calculate the center of a cluster 0 we will use the following instruction:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">data[closest_center<span class="op">==</span><span class="dv">0</span>, :].mean(<span class="dv">0</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">data[closest<span class="op">==</span><span class="dv">0</span>, :].mean(<span class="dv">0</span>)</code></pre></div>
 <pre><code>array([ 2.90695091,  2.52099101])</code></pre>
 <p>To repeat it for all clusters we can use a for loop or list comprehension. Since the number of clusters is usually much smaller than the number of data points, this for loop won’t affect the performance of our algorithm:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">centroids <span class="op">=</span> np.array([data[closest <span class="op">==</span> i, :].mean(<span class="dv">0</span>) <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">3</span>)])</code></pre></div>
