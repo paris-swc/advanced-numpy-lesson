@@ -2,7 +2,7 @@
 layout: page
 title: Advanced NumPy 
 subtitle: Operations on NumPy arrays
-minutes: 5
+minutes: 15
 ---
 > ## Learning Objectives {.objectives}
 >

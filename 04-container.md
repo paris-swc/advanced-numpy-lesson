@@ -2,7 +2,7 @@
 layout: page
 title: Advanced NumPy 
 subtitle: Array container
-minutes: 45
+minutes: 30
 ---
 > ## Learning Objectives {.objectives}
 >

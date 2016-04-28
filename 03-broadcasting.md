@@ -2,7 +2,7 @@
 layout: page
 title: Advanced NumPy 
 subtitle: Broadcasting 
-minutes: 30
+minutes: 40
 ---
 > ## Learning Objectives {.objectives}
 >
