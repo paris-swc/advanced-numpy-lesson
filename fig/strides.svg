@@ -7,12 +7,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   height="386.51471"
+   height="488.51471"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r"
    sodipodi:docname="strides.svg"
-   width="647.72205">
+   width="768.33875">
   <metadata
      id="metadata200">
     <rdf:RDF>
@@ -21,7 +21,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -181,6 +181,36 @@
          transform="matrix(-0.4,0,0,-0.4,-4,0)"
          inkscape:connector-curvature="0" />
     </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5099-0-0"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mstart">
+      <path
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5101-8-2"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5133-7-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5135-9-7"
+         inkscape:connector-curvature="0" />
+    </marker>
   </defs>
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -195,9 +225,9 @@
      inkscape:window-height="1050"
      id="namedview196"
      showgrid="false"
-     inkscape:zoom="1.2672195"
-     inkscape:cx="391.89072"
-     inkscape:cy="161.68819"
+     inkscape:zoom="1.6083568"
+     inkscape:cx="323.23071"
+     inkscape:cy="295.14408"
      inkscape:window-x="0"
      inkscape:window-y="30"
      inkscape:window-maximized="1"
@@ -207,132 +237,139 @@
      fit-margin-right="0"
      fit-margin-bottom="0" />
   <g
-     id="g4"
-     transform="translate(198.66122,22.811271)">
-    <rect
-       width="30"
-       height="30"
-       id="rect6"
-       x="0"
-       y="0"
-       style="fill:none;stroke:#000000" />
-    <text
-       x="15"
-       y="15"
-       style="text-anchor:middle"
-       id="text8">0</text>
-  </g>
-  <g
-     transform="translate(228.66122,22.811271)"
-     id="g10">
-    <rect
-       width="30"
-       height="30"
-       id="rect12"
-       x="0"
-       y="0"
-       style="fill:none;stroke:#000000" />
-    <text
-       x="15"
-       y="15"
-       style="text-anchor:middle"
-       id="text14">1</text>
-  </g>
-  <g
-     transform="translate(258.66121,22.811271)"
-     id="g16">
-    <rect
-       width="30"
-       height="30"
-       id="rect18"
-       x="0"
-       y="0"
-       style="fill:none;stroke:#000000" />
-    <text
-       x="15"
-       y="15"
-       style="text-anchor:middle"
-       id="text20">2</text>
-  </g>
-  <g
-     transform="translate(288.66121,22.811271)"
-     id="g22">
-    <rect
-       width="30"
-       height="30"
-       id="rect24"
-       x="0"
-       y="0"
-       style="fill:none;stroke:#000000" />
-    <text
-       x="15"
-       y="15"
-       style="text-anchor:middle"
-       id="text26">3</text>
-  </g>
-  <g
-     transform="translate(318.66121,22.811271)"
-     id="g28">
-    <rect
-       width="30"
-       height="30"
-       id="rect30"
-       x="0"
-       y="0"
-       style="fill:none;stroke:#000000" />
-    <text
-       x="15"
-       y="15"
-       style="text-anchor:middle"
-       id="text32">4</text>
-  </g>
-  <g
-     transform="translate(348.66121,22.811271)"
-     id="g34">
-    <rect
-       width="30"
-       height="30"
-       id="rect36"
-       x="0"
-       y="0"
-       style="fill:none;stroke:#000000" />
-    <text
-       x="15"
-       y="15"
-       style="text-anchor:middle"
-       id="text38">5</text>
-  </g>
-  <g
-     transform="translate(378.66121,22.811271)"
-     id="g40">
-    <rect
-       width="30"
-       height="30"
-       id="rect42"
-       x="0"
-       y="0"
-       style="fill:none;stroke:#000000" />
-    <text
-       x="15"
-       y="15"
-       style="text-anchor:middle"
-       id="text44">6</text>
-  </g>
-  <g
-     transform="translate(408.66121,22.811271)"
-     id="g46">
-    <rect
-       width="30"
-       height="30"
-       id="rect48"
-       x="0"
-       y="0"
-       style="fill:none;stroke:#000000" />
-    <text
-       x="15"
-       y="15"
-       style="text-anchor:middle"
-       id="text50">7</text>
+     id="g3572"
+     transform="translate(-2,104)">
+    <g
+       id="g3546">
+      <g
+         id="g4"
+         transform="translate(198.66122,22.811271)">
+        <rect
+           width="30"
+           height="30"
+           id="rect6"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text8">0</text>
+      </g>
+      <g
+         transform="translate(228.66122,22.811271)"
+         id="g10">
+        <rect
+           width="30"
+           height="30"
+           id="rect12"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text14">1</text>
+      </g>
+      <g
+         transform="translate(258.66121,22.811271)"
+         id="g16">
+        <rect
+           width="30"
+           height="30"
+           id="rect18"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text20">2</text>
+      </g>
+      <g
+         transform="translate(288.66121,22.811271)"
+         id="g22">
+        <rect
+           width="30"
+           height="30"
+           id="rect24"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text26">3</text>
+      </g>
+      <g
+         transform="translate(318.66121,22.811271)"
+         id="g28">
+        <rect
+           width="30"
+           height="30"
+           id="rect30"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text32">4</text>
+      </g>
+      <g
+         transform="translate(348.66121,22.811271)"
+         id="g34">
+        <rect
+           width="30"
+           height="30"
+           id="rect36"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text38">5</text>
+      </g>
+      <g
+         transform="translate(378.66121,22.811271)"
+         id="g40">
+        <rect
+           width="30"
+           height="30"
+           id="rect42"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text44">6</text>
+      </g>
+      <g
+         transform="translate(408.66121,22.811271)"
+         id="g46">
+        <rect
+           width="30"
+           height="30"
+           id="rect48"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text50">7</text>
+      </g>
+    </g>
   </g>
   <text
      xml:space="preserve"
@@ -372,18 +409,18 @@
        id="flowPara4787" /></flowRoot>  <text
      xml:space="preserve"
      style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     x="586.72705"
+     x="644.55005"
      y="102.10271"
      id="text3528-3-6"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
        id="tspan3530-6-2"
-       x="586.72705"
+       x="644.55005"
        y="102.10271"
        style="font-size:15px">array</tspan></text>
   <g
      id="g3784"
-     transform="translate(0,146.49519)">
+     transform="translate(0,248.49519)">
     <g
        transform="translate(198.66122,53.625154)"
        id="g6765">
@@ -882,7 +919,7 @@
   </g>
   <g
      id="g3879"
-     transform="translate(0,-166)">
+     transform="translate(0,-64)">
     <g
        transform="translate(-87.295547,17.303451)"
        id="g8156">
@@ -1230,6 +1267,315 @@
            x="-239.29855"
            y="31.684223"
            style="font-size:10px">arr.shape[0]</tspan></text>
+    </g>
+    <g
+       id="g8538-8-3"
+       transform="translate(466.45533,-84.597835)">
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path5097-0-7"
+         d="m 299.97343,316.03139 -236.503373,0"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker5099-0-0);marker-end:url(#marker5133-7-8)" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text6715-0-3"
+         y="332.44904"
+         x="174.5509"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-size:10px"
+           y="332.44904"
+           x="174.5509"
+           id="tspan6717-2-9"
+           sodipodi:role="line">arr.shape[0]</tspan></text>
+    </g>
+  </g>
+  <g
+     transform="translate(0,2)"
+     id="g3599">
+    <g
+       id="g3601">
+      <g
+         transform="translate(198.66122,22.811271)"
+         id="g3603">
+        <rect
+           style="fill:none;stroke:#000000"
+           y="0"
+           x="0"
+           id="rect3605"
+           height="30"
+           width="30" />
+        <text
+           id="text3607"
+           style="text-anchor:middle"
+           y="15"
+           x="15">0</text>
+      </g>
+      <g
+         id="g3609"
+         transform="translate(228.66122,22.811271)">
+        <rect
+           style="fill:none;stroke:#000000"
+           y="0"
+           x="0"
+           id="rect3611"
+           height="30"
+           width="30" />
+        <text
+           id="text3613"
+           style="text-anchor:middle"
+           y="15"
+           x="15">1</text>
+      </g>
+      <g
+         id="g3615"
+         transform="translate(258.66121,22.811271)">
+        <rect
+           style="fill:none;stroke:#000000"
+           y="0"
+           x="0"
+           id="rect3617"
+           height="30"
+           width="30" />
+        <text
+           id="text3619"
+           style="text-anchor:middle"
+           y="15"
+           x="15">2</text>
+      </g>
+      <g
+         id="g3621"
+         transform="translate(288.66121,22.811271)">
+        <rect
+           style="fill:none;stroke:#000000"
+           y="0"
+           x="0"
+           id="rect3623"
+           height="30"
+           width="30" />
+        <text
+           id="text3625"
+           style="text-anchor:middle"
+           y="15"
+           x="15">3</text>
+      </g>
+      <g
+         id="g3627"
+         transform="translate(318.66121,22.811271)">
+        <rect
+           style="fill:none;stroke:#000000"
+           y="0"
+           x="0"
+           id="rect3629"
+           height="30"
+           width="30" />
+        <text
+           id="text3631"
+           style="text-anchor:middle"
+           y="15"
+           x="15">4</text>
+      </g>
+      <g
+         id="g3633"
+         transform="translate(348.66121,22.811271)">
+        <rect
+           style="fill:none;stroke:#000000"
+           y="0"
+           x="0"
+           id="rect3635"
+           height="30"
+           width="30" />
+        <text
+           id="text3637"
+           style="text-anchor:middle"
+           y="15"
+           x="15">5</text>
+      </g>
+      <g
+         id="g3639"
+         transform="translate(378.66121,22.811271)">
+        <rect
+           style="fill:none;stroke:#000000"
+           y="0"
+           x="0"
+           id="rect3641"
+           height="30"
+           width="30" />
+        <text
+           id="text3643"
+           style="text-anchor:middle"
+           y="15"
+           x="15">6</text>
+      </g>
+      <g
+         id="g3645"
+         transform="translate(408.66121,22.811271)">
+        <rect
+           style="fill:none;stroke:#000000"
+           y="0"
+           x="0"
+           id="rect3647"
+           height="30"
+           width="30" />
+        <text
+           id="text3649"
+           style="text-anchor:middle"
+           y="15"
+           x="15">7</text>
+      </g>
+    </g>
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="87.943924"
+     y="139.64221"
+     id="text8532-2"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan8534-5"
+       x="87.943924"
+       y="139.64221"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:courier;-inkscape-font-specification:courier">strides = (1, )</tspan><tspan
+       sodipodi:role="line"
+       x="87.943924"
+       y="158.39221"
+       id="tspan8536-1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:courier;-inkscape-font-specification:courier">  shape = (8, )</tspan></text>
+  <g
+     id="g3572-9"
+     transform="translate(327.33972,101.86766)">
+    <g
+       id="g3546-4">
+      <g
+         id="g4-3"
+         transform="translate(198.66122,22.811271)">
+        <rect
+           width="30"
+           height="30"
+           id="rect6-1"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text8-0">0</text>
+      </g>
+      <g
+         transform="translate(228.66122,22.811271)"
+         id="g10-7">
+        <rect
+           width="30"
+           height="30"
+           id="rect12-7"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text14-5">1</text>
+      </g>
+      <g
+         transform="translate(258.66121,22.811271)"
+         id="g16-4">
+        <rect
+           width="30"
+           height="30"
+           id="rect18-5"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text20-6">2</text>
+      </g>
+      <g
+         transform="translate(288.66121,22.811271)"
+         id="g22-9">
+        <rect
+           width="30"
+           height="30"
+           id="rect24-3"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text26-8">3</text>
+      </g>
+      <g
+         transform="translate(318.66121,22.811271)"
+         id="g28-6">
+        <rect
+           width="30"
+           height="30"
+           id="rect30-2"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text32-3">4</text>
+      </g>
+      <g
+         transform="translate(348.66121,22.811271)"
+         id="g34-6">
+        <rect
+           width="30"
+           height="30"
+           id="rect36-2"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text38-0">5</text>
+      </g>
+      <g
+         transform="translate(378.66121,22.811271)"
+         id="g40-7">
+        <rect
+           width="30"
+           height="30"
+           id="rect42-4"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text44-5">6</text>
+      </g>
+      <g
+         transform="translate(408.66121,22.811271)"
+         id="g46-9">
+        <rect
+           width="30"
+           height="30"
+           id="rect48-2"
+           x="0"
+           y="0"
+           style="fill:none;stroke:#000000" />
+        <text
+           x="15"
+           y="15"
+           style="text-anchor:middle"
+           id="text50-5">7</text>
+      </g>
     </g>
   </g>
 </svg>
