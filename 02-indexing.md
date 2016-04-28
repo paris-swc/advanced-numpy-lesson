@@ -127,7 +127,7 @@ array([ 0, -1,  2, -1])
 
 > ## Rectification {.challenge}
 >
-> Rectify an array with random numbers from normal distribution (generated with `np.random.randn`) using boolean indexing.
+> Rectify an array (replace negative elements with zeros) of random numbers from normal distribution (generated with `np.random.randn`) using boolean indexing.
 
 ### Fancy indexing
 
